@@ -1,4 +1,4 @@
-package com.y.bootadmin;
+package com.vulcan;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
