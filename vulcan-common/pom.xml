@@ -10,7 +10,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
-    <artifactId>vulcan-framework</artifactId>
+    <artifactId>vulcan-common</artifactId>
 
     <description>
         common通用工具
