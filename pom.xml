@@ -31,6 +31,7 @@
         <module>vulcan-admin</module>
         <module>vulcan-framework</module>
         <module>vulcan-common</module>
+        <module>vulcan-system</module>
     </modules>
     <packaging>pom</packaging>
 
