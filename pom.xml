@@ -11,6 +11,7 @@
     <description>伏尔甘智能工厂</description>
 
     <properties>
+        <vulcan.version>1.0.0</vulcan.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>21</java.version>

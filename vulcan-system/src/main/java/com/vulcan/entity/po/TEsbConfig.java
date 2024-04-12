@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 /**
- * 【请填写功能名称】对象 t_esb_config
- * 
- * @author weifu
- * @date 2023-03-08
+ * @author Y
+ * @Project: Smart-Factory
+ * @Package: com.vulcan.entity.po
+ * @name: TEsbConfig
+ * @Date: 2024/4/11  下午4:26
+ * @Description //TODO
  */
 @Data
 @Entity

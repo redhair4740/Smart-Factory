@@ -21,7 +21,11 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.vulcan</groupId>
+            <artifactId>vulcan-framework</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
