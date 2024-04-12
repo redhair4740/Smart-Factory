@@ -48,3 +48,10 @@ redis:
     database: 0
     max-total: 8
     max-wait-millis: 10000
+
+# 自定义jwt key
+jwt:
+    tokenHeader: Authorization #JWT存储的请求头
+    secret: mySecret #JWT加解密使用的密钥
+    expiration: 1800 #JWT的超期限时间(30*60)
+    tokenHead: Bearer  #JWT负载中拿到开头
