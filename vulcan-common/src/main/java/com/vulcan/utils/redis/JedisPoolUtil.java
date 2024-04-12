@@ -1,6 +1,6 @@
 package com.vulcan.utils.redis;
 
-import com.vulcan.entity.property.RedisConfig;
+import com.vulcan.config.RedisConfig;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

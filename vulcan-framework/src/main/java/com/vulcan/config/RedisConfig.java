@@ -1,4 +1,4 @@
-package com.vulcan.entity.property;
+package com.vulcan.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 /**
  * @author Y
  * @Project: Smart-Factory
- * @Package: com.vulcan.entity.property
+ * @Package: com.vulcan.config
  * @name: RedisConfig
  * @Date: 2024/4/12  上午10:46
  * @Description //TODO
