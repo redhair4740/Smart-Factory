@@ -49,10 +49,6 @@ public class SysLoginController {
             if(BCrypt.checkpw(loginUserDto.getPassword(), sysUser.get().getPassword())){
                 // 第二步：根据账号id，进行登录
                 StpUtil.login(sysUser.get().getId());
-
-                SaTokenInfo saTokenInfo = StpUtil.getTokenInfo();
-                redisService.lPush("OnlineUser:" + sysUser.get().getId() + ":" + saTokenInfo.tokenValue, sysUser.get());
-
                 return SaResult.ok("登录成功");
             }
         }
