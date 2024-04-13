@@ -67,12 +67,6 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>5.1.2</version>
-        </dependency>
-
         <!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
         <dependency>
             <groupId>cn.dev33</groupId>

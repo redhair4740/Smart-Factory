@@ -1,10 +1,12 @@
 package com.vulcan.web.System;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.vulcan.entity.dto.LoginUserDto;
 import com.vulcan.entity.po.SysUser;
 import com.vulcan.service.SysUserService;
+import com.vulcan.utils.redis.RedisService;
 import jakarta.annotation.Resource;
 import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
@@ -27,6 +29,9 @@ public class SysLoginController {
     @Resource
     private SysUserService sysUserService;
 
+    @Resource
+    private RedisService redisService;
+
     /**
      * 登录
      * @param loginUserDto
@@ -44,15 +49,14 @@ public class SysLoginController {
             if(BCrypt.checkpw(loginUserDto.getPassword(), sysUser.get().getPassword())){
                 // 第二步：根据账号id，进行登录
                 StpUtil.login(sysUser.get().getId());
+
+                SaTokenInfo saTokenInfo = StpUtil.getTokenInfo();
+                redisService.lPush("OnlineUser:" + sysUser.get().getId() + ":" + saTokenInfo.tokenValue, sysUser.get());
+
                 return SaResult.ok("登录成功");
             }
         }
         return SaResult.error("登录失败");
-    }
-
-    @GetMapping("/login1")
-    public void doLogin1() {
-        System.out.println(111);
     }
 
 }
