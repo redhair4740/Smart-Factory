@@ -1,6 +1,6 @@
 package com.vulcan.service.impl;
 
-import com.vulcan.dao.SysUserDao;
+import com.vulcan.repository.SysUserRepository;
 import com.vulcan.entity.po.SysUser;
 import com.vulcan.service.SysUserService;
 import jakarta.annotation.Resource;
@@ -18,7 +18,7 @@ import java.util.Optional;
 public class SysUserServiceImpl implements SysUserService {
 
     @Resource
-    private SysUserDao sysUserDao;
+    private SysUserRepository sysUserRepository;
 
     /**
      * 根据id查询用户
@@ -27,6 +27,16 @@ public class SysUserServiceImpl implements SysUserService {
      */
     @Override
     public Optional<SysUser> findById(Long id) {
-        return sysUserDao.findById(id);
+        return sysUserRepository.findById(id);
+    }
+
+    /**
+     * 根据登录名查询用户
+     * @param loginName
+     * @return Optional<SysUser>
+     */
+    @Override
+    public Optional<SysUser> findByLoginName(String loginName) {
+        return sysUserRepository.findByLoginName(loginName);
     }
 }

@@ -15,7 +15,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Data
 @Configuration
-@PropertySource("application.yml")
+@PropertySource(value = "application.yml")
 @ConfigurationProperties(prefix = "redis")
 public class RedisConfig {
 
@@ -32,8 +32,6 @@ public class RedisConfig {
     private int maxWait;
 
     private int maxIdle;
-
-    private int mimIdle;
 
     private int timeout;
 
