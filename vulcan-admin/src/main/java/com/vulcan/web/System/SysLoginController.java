@@ -8,10 +8,7 @@ import com.vulcan.service.SysUserService;
 import jakarta.annotation.Resource;
 import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -51,6 +48,11 @@ public class SysLoginController {
             }
         }
         return SaResult.error("登录失败");
+    }
+
+    @GetMapping("/login1")
+    public void doLogin1() {
+        System.out.println(111);
     }
 
 }

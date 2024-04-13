@@ -4,6 +4,7 @@ import com.vulcan.repository.SysUserRepository;
 import com.vulcan.entity.po.SysUser;
 import com.vulcan.service.SysUserService;
 import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
  * @Date: 2024/4/12  下午3:30
  * @Description //TODO
  */
+@Service
 public class SysUserServiceImpl implements SysUserService {
 
     @Resource

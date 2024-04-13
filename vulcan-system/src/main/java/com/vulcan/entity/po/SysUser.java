@@ -3,6 +3,9 @@ package com.vulcan.entity.po;
 import com.vulcan.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * @author Y
@@ -12,10 +15,11 @@ import lombok.Data;
  * @Date: 2024/4/12  下午1:53
  * @Description //TODO
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "sys_user")
-public class SysUser extends BaseEntity {
+public class SysUser extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,15 +53,15 @@ public class SysUser extends BaseEntity {
     private String email;
 
     //工厂编码
-    @Column(name = "plantCode")
-    private String plant_code;
+    @Column(name = "plant_code")
+    private String plantCode;
 
     //是否是超级管理员（0代表不是 1代表是）
     @Column(name = "super_admin_flag")
-    private String superAdminFlag;
+    private Integer superAdminFlag;
 
     //是否是工厂管理员（0代表不是 1代表是）
     @Column(name = "plant_admin_flag")
-    private String plantAdminFlag;
+    private Integer plantAdminFlag;
 
 }
