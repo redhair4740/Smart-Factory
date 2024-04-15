@@ -55,4 +55,16 @@ public class SysLoginController {
         return SaResult.error("登录失败");
     }
 
+    /**
+     * 刷新token
+     */
+    @GetMapping("/refresh")
+    public void refresh() {
+        // 先检查是否已被冻结
+//        StpUtil.checkActiveTimeout();
+        System.out.println(StpUtil.getTokenActiveTimeout());
+        // 检查通过后继续续签
+        StpUtil.updateLastActiveToNow();
+    }
+
 }
