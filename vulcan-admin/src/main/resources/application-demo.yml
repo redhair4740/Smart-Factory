@@ -49,6 +49,12 @@ spring:
     jpa:
         show-sql: true #显示sql
 
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token:
     # token 名称（同时也是 cookie 名称）
