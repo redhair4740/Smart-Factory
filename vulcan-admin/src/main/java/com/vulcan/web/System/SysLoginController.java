@@ -1,6 +1,5 @@
 package com.vulcan.web.System;
 
-import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.vulcan.entity.dto.LoginUserDto;
@@ -28,9 +27,6 @@ public class SysLoginController {
 
     @Resource
     private SysUserService sysUserService;
-
-    @Resource
-    private RedisService redisService;
 
     /**
      * 登录
