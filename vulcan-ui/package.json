@@ -13,6 +13,7 @@
     "axios": "^1.6.8",
     "naive-ui": "^2.38.1",
     "pinia": "^2.1.7",
+    "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
     "vfonts": "^0.0.3",
     "vue": "^3.4.21",
