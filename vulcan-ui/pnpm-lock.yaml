@@ -17,6 +17,9 @@ importers:
       js-cookie:
         specifier: ^3.0.5
         version: 3.0.5
+      jsencrypt:
+        specifier: ^3.3.2
+        version: 3.3.2
       naive-ui:
         specifier: ^2.38.1
         version: 2.38.1(vue@3.4.24)
@@ -38,6 +41,9 @@ importers:
       vue-router:
         specifier: ^4.3.2
         version: 4.3.2(vue@3.4.24)
+      vuex:
+        specifier: ^4.1.0
+        version: 4.1.0(vue@3.4.24)
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^5.0.4
@@ -556,6 +562,9 @@ packages:
     resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
     engines: {node: '>=14'}
 
+  jsencrypt@3.3.2:
+    resolution: {integrity: sha512-arQR1R1ESGdAxY7ZheWr12wCaF2yF47v5qpB76TtV64H1pyGudk9Hvw8Y9tb/FiTIaaTRUyaSnm5T/Y53Ghm/A==}
+
   local-pkg@0.4.3:
     resolution: {integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==}
     engines: {node: '>=14'}
@@ -806,6 +815,11 @@ packages:
     resolution: {integrity: sha512-Wnj/N8WbPRSxSt+9ji1jtDHPzda5h2OH/0sFBhvdxDRuyCZbjGg3/cKMaKqEoe+dErTexG2R+i6Q8S/Toq1MYg==}
     peerDependencies:
       vue: ^3.0.11
+
+  vuex@4.1.0:
+    resolution: {integrity: sha512-hmV6UerDrPcgbSy9ORAtNXDr9M4wlNP4pEFKye4ujJF8oqgFFuxDCdOLS3eNoRTtq5O3hoBDh9Doj1bQMYHRbQ==}
+    peerDependencies:
+      vue: ^3.2.0
 
   webpack-sources@3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
@@ -1226,6 +1240,8 @@ snapshots:
 
   js-cookie@3.0.5: {}
 
+  jsencrypt@3.3.2: {}
+
   local-pkg@0.4.3: {}
 
   local-pkg@0.5.0:
@@ -1489,6 +1505,11 @@ snapshots:
       seemly: 0.3.8
       vdirs: 0.1.8(vue@3.4.24)
       vooks: 0.2.12(vue@3.4.24)
+      vue: 3.4.24
+
+  vuex@4.1.0(vue@3.4.24):
+    dependencies:
+      '@vue/devtools-api': 6.6.1
       vue: 3.4.24
 
   webpack-sources@3.2.3: {}
