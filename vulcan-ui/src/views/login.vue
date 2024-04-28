@@ -47,7 +47,11 @@ export default {
 
       // 加密
       form.value.password = encrypt(form.value.password);
-      await store.dispatch('auth/login', form.value);
+      await store.dispatch('auth/login', form.value).then(() => {
+        this.$router.push({ path: this.redirect || "/" }).catch(()=>{});
+      }).catch(() => {
+        // this.loading = false;
+      });
 
     };
 
