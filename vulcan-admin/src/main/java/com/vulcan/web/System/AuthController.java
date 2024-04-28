@@ -5,7 +5,9 @@ import cn.dev33.satoken.util.SaResult;
 import com.vulcan.entity.dto.LoginUserDto;
 import com.vulcan.entity.po.SysUser;
 import com.vulcan.service.SysUserService;
+import com.vulcan.utils.EncryptionUtils;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/auth")
+@Slf4j
 public class AuthController {
 
     @Resource
@@ -37,6 +40,13 @@ public class AuthController {
      */
     @PostMapping("/login")
     public SaResult doLogin(@RequestBody LoginUserDto loginUserDto) {
+
+        try {
+            EncryptionUtils.decrypt(loginUserDto);
+        } catch (Exception e) {
+            log.error("登录密码解密失败", e);
+            return SaResult.error("登录失败");
+        }
 
         // 创建一个 ModelMapper 对象
         ModelMapper modelMapper = new ModelMapper();

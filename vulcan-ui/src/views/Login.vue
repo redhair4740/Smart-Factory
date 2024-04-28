@@ -45,6 +45,8 @@ export default {
         Cookies.remove('rememberMe');
       }
 
+      // 加密
+      form.value.password = encrypt(form.value.password);
       await store.dispatch('auth/login', form.value);
 
     };

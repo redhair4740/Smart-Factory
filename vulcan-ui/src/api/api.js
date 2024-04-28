@@ -1,6 +1,7 @@
 // services/api.js
 import axios from 'axios';
 import cache from '@/plugins/cache'
+import errorCode from '@/utils/errorCode'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
