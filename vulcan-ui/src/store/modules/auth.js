@@ -1,5 +1,6 @@
-// auth.js
+// token.js
 import { login } from '@/api/login'
+import { setToken } from '@/utils/token.js'
 
 export default {
     namespaced: true,
@@ -8,7 +9,7 @@ export default {
         isAuthenticated: false,
     },
     mutations: {
-        setToken(state, token) {
+        SET_TOKEN(state, token) {
             state.token = token;
             state.isAuthenticated = !!token;
         },
@@ -17,9 +18,9 @@ export default {
         async login({ commit }, userInfo) {
             return new Promise((resolve, reject) => {
                 login(userInfo).then(res => {
-                    // setToken(res.token)
-                    // commit('SET_TOKEN', res.token)
-                    // resolve()
+                    setToken(res.data.tokenValue)
+                    commit('SET_TOKEN', res.data.tokenValue)
+                    resolve()
                 }).catch(error => {
                     reject(error)
                 })

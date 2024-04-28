@@ -1,5 +1,6 @@
 package com.vulcan.web.System;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.vulcan.entity.dto.LoginUserDto;
@@ -57,7 +58,8 @@ public class AuthController {
             if(BCrypt.checkpw(loginUserDto.getPassword(), sysUser.get().getPassword())){
                 // 第二步：根据账号id，进行登录
                 StpUtil.login(sysUser.get().getId());
-                return SaResult.ok("登录成功");
+                SaTokenInfo saTokenInfo = StpUtil.getTokenInfo();
+                return SaResult.data(saTokenInfo);
             }
         }
         return SaResult.error("登录失败");
