@@ -1,24 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
+import Login from '@/views/login.vue';
+import Index from '@/views/index.vue';
+
 const routes = [
     {
         path: '/login',
-        component: () => import('@/views/login.vue'),
+        component: Login,
         meta: { title: '登录' }, // 为每个路由添加一个 `title` 属性
         hidden: true
     },
     {
-        path: '',
+        path: '/',
         // component: Layout,
-        redirect: 'index',
-        children: [
-            {
-                path: 'index',
-                component: () => import('@/views/index.vue'),
-                name: 'Index',
-                meta: { title: '首页', icon: 'dashboard', affix: true }
-            }
-        ]
+        component: Index,
+        name: Index,
+        meta: { title: '首页' },
     },
 ];
 
