@@ -3,7 +3,8 @@ import '@/style.css'
 import App from '@/App.vue'
 import router from '@/router';
 import TitlePlugin from '@/plugins/title-plugin';
-import store from '@/store'; // 导入创建的 Store
+import { createPinia } from 'pinia'; // 引入Pinia
+import { stores } from '@/store/store.js'; // 导入集中管理的store
 import axios from 'axios'
 
 import {
@@ -23,10 +24,13 @@ const naive = create({
     components: [NButton,NCard,NForm,NFormItem,NInput,NCheckbox,NDynamicInput]
 })
 
+// 创建Pinia实例
+const pinia = createPinia();
+
 createApp(App)
     .use(naive)
     .use(router)
     .use(TitlePlugin)
-    .use(store)
+    .use(pinia)
     .provide('$axios',axios)
     .mount('#app');

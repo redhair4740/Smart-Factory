@@ -21,9 +21,6 @@
 import { ref } from 'vue';
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from './../utils/jsencrypt'
-import { useStore } from 'vuex';
-
-const store = useStore();
 
 const form = ref({
   loginName: '',
