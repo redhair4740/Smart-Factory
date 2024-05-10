@@ -21,12 +21,15 @@
 import { ref } from 'vue';
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from './../utils/jsencrypt'
+import { useRouter } from 'vue-router'; // 引入Vue Router的useRouter
 
 const form = ref({
   loginName: '',
   password: '',
   rememberMe: false
 });
+
+const router = useRouter(); // 创建Vue Router实例
 
 const handleLogin = async () => {
 
@@ -41,13 +44,11 @@ const handleLogin = async () => {
     Cookies.remove('rememberMe');
   }
 
-  // 加密
-  form.value.password = encrypt(form.value.password);
-  await store.dispatch('auth/login', form.value).then(() => {
-    router.push({ name: 'Index' });
-  }).catch(() => {
-    // this.loading = false;
-  });
+  try {
+    router.push('/');
+  } catch (error) {
+    console.error('页面跳转时发生错误:', error);
+  }
 
 };
 

@@ -1,20 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Login from '@/views/login.vue';
-import Index from '@/views/index.vue';
+import login from '@/views/login.vue';
+import index from '@/views/index.vue';
 
 const routes = [
     {
         path: '/login',
-        component: Login,
+        name: 'login',
+        component: login,
         meta: { title: '登录' }, // 为每个路由添加一个 `title` 属性
         hidden: true
     },
     {
         path: '/',
         // component: Layout,
-        component: Index,
-        name: Index,
+        component: index,
+        name: 'Home',
         meta: { title: '首页' },
     },
 ];

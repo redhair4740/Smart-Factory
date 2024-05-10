@@ -4,7 +4,7 @@ import App from '@/App.vue'
 import router from '@/router';
 import TitlePlugin from '@/plugins/title-plugin';
 import { createPinia } from 'pinia'; // 引入Pinia
-import { stores } from '@/store/store.js'; // 导入集中管理的store
+
 import axios from 'axios'
 
 import {
