@@ -1,55 +1,53 @@
 <template>
-  <n-card :bordered="false" size="huge" title="登录">
-    <n-form>
-      <n-form-item label="用户名" prop="loginName">
-        <n-input size="large" round v-model:value="form.loginName" type="text" clearable placeholder="请输入用户名" />
-      </n-form-item>
-      <n-form-item label="密码" prop="password">
-        <n-input size="large" round type="password" v-model:value="form.password" clearable placeholder="请输入密码" />
-      </n-form-item>
-      <n-form-item>
-        <n-checkbox v-model:checked="form.rememberMe">记住密码</n-checkbox>
-      </n-form-item>
-      <n-form-item>
-        <n-button type="primary" @click="handleLogin">登录</n-button>
-      </n-form-item>
-    </n-form>
-  </n-card>
+  <el-card>
+    <h3 class="login-title">Login</h3>
+    <el-form ref="loginForm" :rules="rules" @submit.prevent="handleSubmit">
+      <el-form-item label="Username" prop="username">
+        <el-input
+          v-model="username"
+          placeholder="Enter your username"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="Password" prop="password">
+        <el-input
+          type="password"
+          v-model="password"
+          placeholder="Enter your password"
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="handleSubmit">Login</el-button>
+      </el-form-item>
+    </el-form>
+  </el-card>
 </template>
 
-<script setup lang="js">
-import { ref } from 'vue';
-import Cookies from "js-cookie";
-import { encrypt, decrypt } from './../utils/jsencrypt'
-import { useRouter } from 'vue-router'; // 引入Vue Router的useRouter
-
-const form = ref({
-  loginName: '',
-  password: '',
-  rememberMe: false
-});
-
-const router = useRouter(); // 创建Vue Router实例
-
-const handleLogin = async () => {
-
-  // 实现登录逻辑，如发送请求到后端服务
-  if (form.value.rememberMe) {
-    Cookies.set("loginName", form.value.loginName, { expires: 30 });
-    Cookies.set("password", encrypt(form.value.password), { expires: 30 });
-    Cookies.set('rememberMe', form.value.rememberMe, { expires: 30 });
-  } else {
-    Cookies.remove("loginName");
-    Cookies.remove("password");
-    Cookies.remove('rememberMe');
-  }
-
-  try {
-    router.push('/');
-  } catch (error) {
-    console.error('页面跳转时发生错误:', error);
-  }
-
+<script lang="ts">
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      rules: {
+        username: [
+          {
+            required: true,
+            message: "Please enter your username",
+            trigger: "blur",
+          },
+        ],
+        password: [
+          {
+            required: true,
+            message: "Please enter your password",
+            trigger: "blur",
+          },
+        ],
+      },
+    };
+  },
+  methods: {
+    handleSubmit() {},
+  },
 };
-
 </script>

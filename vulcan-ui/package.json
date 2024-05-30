@@ -5,24 +5,26 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vicons/material": "^0.12.0",
-    "axios": "^1.6.8",
+    "axios": "^1.7.2",
+    "element-plus": "^2.7.3",
     "js-cookie": "^3.0.5",
     "jsencrypt": "^3.3.2",
-    "naive-ui": "^2.38.1",
     "pinia": "^2.1.7",
-    "unplugin-auto-import": "^0.17.5",
-    "unplugin-vue-components": "^0.26.0",
-    "vfonts": "^0.0.3",
     "vue": "^3.4.21",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
+    "@types/node": "^20.12.13",
     "@vitejs/plugin-vue": "^5.0.4",
-    "vite": "^5.2.0"
+    "typescript": "^5.2.2",
+    "unplugin-auto-import": "^0.17.6",
+    "unplugin-vue-components": "^0.27.0",
+    "vite": "^5.2.0",
+    "vite-plugin-resolve": "^2.5.1",
+    "vue-tsc": "^2.0.6"
   }
 }
