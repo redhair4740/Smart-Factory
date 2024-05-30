@@ -23,7 +23,9 @@
 </template>
 
 <script lang="ts">
+import { useRouter } from "vue-router";
 export default {
+  name: "Home",
   data() {
     return {
       username: "",
@@ -47,7 +49,9 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {},
+    handleSubmit() {
+      this.$router.push({ path: "/" });
+    },
   },
 };
 </script>
