@@ -23,35 +23,44 @@
 </template>
 
 <script lang="ts">
+import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 export default {
-  name: "Home",
-  data() {
-    return {
-      username: "",
-      password: "",
-      rules: {
-        username: [
-          {
-            required: true,
-            message: "Please enter your username",
-            trigger: "blur",
-          },
-        ],
-        password: [
-          {
-            required: true,
-            message: "Please enter your password",
-            trigger: "blur",
-          },
-        ],
-      },
+  name: "Login",
+  setup() {
+    const username = ref("");
+    const password = ref("");
+    const rules = reactive({
+      username: [
+        {
+          required: true,
+          message: "Please enter your username",
+          trigger: "blur",
+        },
+      ],
+      password: [
+        {
+          required: true,
+          message: "Please enter your password",
+          trigger: "blur",
+        },
+      ],
+    });
+    const router = useRouter();
+    const handleSubmit = () => {
+      router.push("/index");
     };
-  },
-  methods: {
-    handleSubmit() {
-      this.$router.push({ path: "/" });
-    },
+
+    onMounted(() => {
+      // Any initialization logic here
+    });
+
+    return {
+      username,
+      password,
+      rules,
+      handleSubmit,
+    };
   },
 };
 </script>
