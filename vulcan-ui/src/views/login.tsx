@@ -9,30 +9,41 @@ import {
   ElMain,
   ElRow,
   ElCol,
+  ElMessage,
 } from "element-plus";
-import { defineComponent, reactive } from "vue";
-import axios from "axios";
+import { defineComponent, reactive, watch } from "vue";
 import bcrypt from "bcryptjs";
+import { login } from "@/api/auth.ts";
+import { User } from "@/model/auth.ts";
 
 export default defineComponent({
   setup() {
-    const data = reactive({ username: "", password: "" });
+    const data = reactive<User>({ id: 0, loginName: "", password: "" });
     const router = useRouter();
 
-    const login = async () => {
+    watch(
+      () => data.loginName,
+      (newValue, oldValue) => {
+        console.info(newValue);
+        console.info(oldValue);
+      }
+    );
+
+    const loginCommit = async () => {
       const hashedPassword = await bcrypt.hash(data.password, 10); // 使用bcrypt的盐值为10
+      data.password = hashedPassword;
       try {
-        const response = await axios.post("/api/login", {
-          username: data.username,
-          password: hashedPassword,
-        });
-        console.log("Login response:", response.data);
+        const responseData = await login({ ...data, password: hashedPassword });
+        if (responseData.code === 200 && responseData.msg) {
+          router.push("/index");
+        } else {
+          ElMessage.error("登录失败:" + responseData.msg);
+        }
         // 在这里处理登录成功的情况，例如存储token
       } catch (error) {
-        console.error("Login error:", error);
-        // 在这里处理登录失败的情况，例如显示错误消息
+        console.error("登录失败:", error);
+        ElMessage.error("登录失败:" + error.message);
       }
-      router.push("/index");
     };
     const register = () => {};
 
@@ -52,7 +63,7 @@ export default defineComponent({
                 <ElForm label-position="right" label-width="auto">
                   <ElFormItem label="用户名" prop="username">
                     <ElInput
-                      v-model={data.username}
+                      v-model={data.loginName}
                       placeholder="请输入用户名"
                     ></ElInput>
                   </ElFormItem>
@@ -60,6 +71,7 @@ export default defineComponent({
                     <ElInput
                       v-model={data.password}
                       placeholder="请输入密码"
+                      show-password
                     ></ElInput>
                   </ElFormItem>
                   {/* 使用ElRow和ElCol来实现按钮靠右 */}
@@ -78,7 +90,7 @@ export default defineComponent({
                       <ElButton
                         type="primary"
                         {...{
-                          onClick: login,
+                          onClick: loginCommit,
                         }}
                       >
                         登录

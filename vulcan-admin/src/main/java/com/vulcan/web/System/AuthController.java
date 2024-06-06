@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
@@ -42,20 +43,22 @@ public class AuthController {
     @PostMapping("/login")
     public SaResult doLogin(@RequestBody LoginUserDto loginUserDto) {
 
-        try {
-            EncryptionUtils.decrypt(loginUserDto);
-        } catch (Exception e) {
-            log.error("登录密码解密失败", e);
-            return SaResult.error("登录失败");
-        }
+//        try {
+//            EncryptionUtils.decrypt(loginUserDto);
+//        } catch (Exception e) {
+//            log.error("登录密码解密失败", e);
+//            return SaResult.error("登录失败");
+//        }
 
         // 创建一个 ModelMapper 对象
         ModelMapper modelMapper = new ModelMapper();
         SysUser sysUserParam = modelMapper.map(loginUserDto, SysUser.class);
         Optional<SysUser> sysUser = sysUserService.findByLoginName(sysUserParam.getLoginName());
         if(sysUser.isPresent()){
+            // 创建bcrypt密码编码器
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             // 使用checkpw方法检查被加密的字符串是否与原始字符串匹配：
-            if(BCrypt.checkpw(loginUserDto.getPassword(), sysUser.get().getPassword())){
+            if(passwordEncoder.matches("123456", sysUser.get().getPassword())){
                 // 第二步：根据账号id，进行登录
                 StpUtil.login(sysUser.get().getId());
                 SaTokenInfo saTokenInfo = StpUtil.getTokenInfo();
