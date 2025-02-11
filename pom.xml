@@ -15,7 +15,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>21</java.version>
-
+        <druid.version>1.2.22</druid.version>
+        <dynamic-datasource.version>4.3.0</dynamic-datasource.version>
+        <mysql-connector.version>8.0.33</mysql-connector.version>
+        <sa-token.version>1.37.0</sa-token.version>
+        <modelmapper.version>3.2.0</modelmapper.version>
+        <jbcrypt.version>0.4</jbcrypt.version>
+        <hutool.version>5.8.26</hutool.version>
+        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <caffeine.version>3.1.8</caffeine.version>
+        <amqp.version>3.2.3</amqp.version>
+        <async-http-client.version>3.0.0</async-http-client.version>
+        <spring-retry.version>2.0.7</spring-retry.version>
     </properties>
 
     <dependencyManagement>
@@ -56,19 +67,19 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.22</version>
+            <version>${druid.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
-            <version>4.3.0</version>
+            <version>${dynamic-datasource.version}</version>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
+            <version>${mysql-connector.version}</version>
         </dependency>
 
         <dependency>
@@ -80,63 +91,63 @@
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-spring-boot3-starter</artifactId>
-            <version>1.37.0</version>
+            <version>${sa-token.version}</version>
         </dependency>
 
         <!-- Sa-Token 整合 Redis （使用 jackson 序列化方式） -->
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-redis-jackson</artifactId>
-            <version>1.37.0</version>
+            <version>${sa-token.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
-            <version>3.2.0</version>
+            <version>${modelmapper.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
-            <version>0.4</version>
+            <version>${jbcrypt.version}</version>
         </dependency>
 
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.26</version>
+            <version>${hutool.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.14.0</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
 
 
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
-            <version>3.1.8</version>
+            <version>${caffeine.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
-            <version>3.2.3</version>
+            <version>${amqp.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.asynchttpclient</groupId>
             <artifactId>async-http-client</artifactId>
-            <version>3.0.0</version>
+            <version>${async-http-client.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>
-            <version>2.0.7</version>
+            <version>${spring-retry.version}</version>
         </dependency>
 
     </dependencies>
