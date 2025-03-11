@@ -1,10 +1,11 @@
-package com.vulcan.web.System;
+package com.vulcan.system.controller.login;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.vulcan.entity.dto.LoginUserDto;
 import com.vulcan.entity.po.SysUser;
 import com.vulcan.service.SysUserService;
+import com.vulcan.utils.security.EncryptionUtils;
 import jakarta.annotation.Resource;
 import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
@@ -15,7 +16,7 @@ import java.util.Optional;
 /**
  * @author Y
  * @Project: Smart-Factory
- * @Package: com.vulcan.web.System
+ * @Package: com.vulcan.system.controller.login
  * @name: SysLoginController
  * @Date: 2024/4/12 下午3:37
  * @Description 系统登录控制器，处理用户登录相关的请求
@@ -35,20 +36,26 @@ public class SysLoginController {
      */
     @PostMapping("/login")
     public SaResult doLogin(@RequestBody LoginUserDto loginUserDto) {
-
-        // 创建一个 ModelMapper 对象
-        ModelMapper modelMapper = new ModelMapper();
-        SysUser sysUserParam = modelMapper.map(loginUserDto, SysUser.class);
-        Optional<SysUser> sysUser = sysUserService.findByLoginName(sysUserParam.getLoginName());
-        if (sysUser.isPresent()) {
-            // 使用checkpw方法检查被加密的字符串是否与原始字符串匹配：
-            if (BCrypt.checkpw(loginUserDto.getPassword(), sysUser.get().getPassword())) {
-                // 第二步：根据账号id，进行登录
-                StpUtil.login(sysUser.get().getId());
-                return SaResult.ok("登录成功");
+        try {
+            // 解密密码
+            EncryptionUtils.decrypt(loginUserDto, "password", "password");
+            
+            // 创建一个 ModelMapper 对象
+            ModelMapper modelMapper = new ModelMapper();
+            SysUser sysUserParam = modelMapper.map(loginUserDto, SysUser.class);
+            Optional<SysUser> sysUser = sysUserService.findByLoginName(sysUserParam.getLoginName());
+            if (sysUser.isPresent()) {
+                // 使用checkpw方法检查被加密的字符串是否与原始字符串匹配：
+                if (BCrypt.checkpw(loginUserDto.getPassword(), sysUser.get().getPassword())) {
+                    // 第二步：根据账号id，进行登录
+                    StpUtil.login(sysUser.get().getId());
+                    return SaResult.ok("登录成功");
+                }
             }
+            return SaResult.error("登录失败");
+        } catch (Exception e) {
+            return SaResult.error("登录异常：" + e.getMessage());
         }
-        return SaResult.error("登录失败");
     }
 
     /**
@@ -62,5 +69,4 @@ public class SysLoginController {
         // 检查通过后继续续签
         StpUtil.updateLastActiveToNow();
     }
-
-}
+} 

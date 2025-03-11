@@ -1,6 +1,5 @@
-package com.vulcan.utils;
+package com.vulcan.utils.security;
 
-import com.vulcan.entity.dto.LoginUserDto;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import javax.crypto.Cipher;
 import javax.crypto.spec.OAEPParameterSpec;
@@ -14,8 +13,8 @@ import java.util.Base64;
 /**
  * @author Y
  * @Project: Smart-Factory
- * @Package: com.vulcan.utils
- * @name: DecryptUtil
+ * @Package: com.vulcan.utils.security
+ * @name: EncryptionUtils
  * @Date: 2024/4/28 上午9:21
  * @Description 加密工具类，提供RSA加密解密功能
  */
@@ -33,7 +32,7 @@ public class EncryptionUtils {
         Security.addProvider(new BouncyCastleProvider());
     }
 
-    public static void decrypt(LoginUserDto loginUserDto) throws Exception {
+    public static <T> void decrypt(T loginData, String encryptedField, String decryptedField) throws Exception {
         // 加载私钥
         byte[] decodedPrivateKey = Base64.getDecoder().decode(privateKeyBase64);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decodedPrivateKey);
@@ -51,10 +50,22 @@ public class EncryptionUtils {
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
         }
 
-        // 解密数据
-        byte[] encryptedBytes = Base64.getDecoder().decode(loginUserDto.getPassword());
-        byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
-
-        loginUserDto.setPassword(new String(decryptedBytes, StandardCharsets.UTF_8));
+        try {
+            // 使用反射获取字段值
+            java.lang.reflect.Field encryptedFieldObj = loginData.getClass().getDeclaredField(encryptedField);
+            encryptedFieldObj.setAccessible(true);
+            String encryptedValue = (String) encryptedFieldObj.get(loginData);
+            
+            // 解密数据
+            byte[] encryptedBytes = Base64.getDecoder().decode(encryptedValue);
+            byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+            
+            // 设置解密后的值到指定字段
+            java.lang.reflect.Field decryptedFieldObj = loginData.getClass().getDeclaredField(decryptedField);
+            decryptedFieldObj.setAccessible(true);
+            decryptedFieldObj.set(loginData, new String(decryptedBytes, StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            throw new RuntimeException("解密失败", e);
+        }
     }
-}
+} 

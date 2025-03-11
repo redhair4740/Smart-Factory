@@ -1,4 +1,4 @@
-package com.vulcan.config;
+package com.vulcan.cache.config;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
@@ -10,21 +10,17 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Author Y
  * @Project: Smart-Factory
- * @Package: com.vulcan.config
+ * @Package: com.vulcan.cache.config
  * @name: CaffeineCacheConfig
- * @Date: 2024/4/16 下午7:48
- * @Description Caffeine缓存配置类，用于配置本地缓存，提供高性能的缓存服务
+ * @Date: 2024/4/16 下午7:58
+ * @Description Caffeine缓存配置类
  */
 @Configuration
 public class CaffeineCacheConfig {
     @Bean
     public Cache<String, Object> caffeineCache() {
         return Caffeine.newBuilder()
-                // 设置最后一次写入或访问后经过固定时间过期
-                .expireAfterWrite(10, TimeUnit.SECONDS)
-                // 初始的缓存空间大小
-                .initialCapacity(100)
-                // 缓存的最大条数
+                .expireAfterWrite(60, TimeUnit.MINUTES)
                 .maximumSize(1000)
                 .build();
     }

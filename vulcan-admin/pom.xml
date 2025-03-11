@@ -13,7 +13,7 @@
     <artifactId>vulcan-admin</artifactId>
 
     <description>
-        web服务入口
+        应用服务入口模块
     </description>
 
     <properties>
@@ -21,6 +21,7 @@
     </properties>
 
     <dependencies>
+        <!-- 基础依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -32,24 +33,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- 只需要依赖vulcan-system模块，因为它已经依赖了framework和common模块 -->
+        <!-- 只需要依赖vulcan-system模块，因为它已经依赖了framework、common等其他模块 -->
         <dependency>
             <groupId>com.vulcan</groupId>
             <artifactId>vulcan-system</artifactId>
-            <version>1.0.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.70</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-crypto</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -57,7 +45,17 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.2.4</version>
+                <configuration>
+                    <mainClass>com.vulcan.BootAdminApplication</mainClass>
+                    <layout>JAR</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

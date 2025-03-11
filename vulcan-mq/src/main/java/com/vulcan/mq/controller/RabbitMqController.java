@@ -1,4 +1,4 @@
-package com.vulcan.web.System;
+package com.vulcan.mq.controller;
 
 import jakarta.annotation.Resource;
 import org.springframework.amqp.core.Message;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @Author Y
  * @Project: Smart-Factory
- * @Package: com.vulcan.web.System
+ * @Package: com.vulcan.mq.controller
  * @name: RabbitMqController
  * @Date: 2024/4/16 下午8:23
  * @Description RabbitMQ消息控制器，提供消息队列的发送接口，用于系统间异步通信

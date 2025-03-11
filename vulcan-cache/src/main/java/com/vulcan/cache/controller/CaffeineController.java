@@ -1,4 +1,4 @@
-package com.vulcan.web.System;
+package com.vulcan.cache.controller;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import jakarta.annotation.Resource;
@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * @Author Y
  * @Project: Smart-Factory
- * @Package: com.vulcan.web.System
+ * @Package: com.vulcan.cache.controller
  * @name: CaffeineController
  * @Date: 2024/4/16 下午7:58
  * @Description Caffeine缓存控制器，提供缓存数据的添加和获取接口
