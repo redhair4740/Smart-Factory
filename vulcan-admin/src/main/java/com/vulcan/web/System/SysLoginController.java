@@ -5,7 +5,6 @@ import cn.dev33.satoken.util.SaResult;
 import com.vulcan.entity.dto.LoginUserDto;
 import com.vulcan.entity.po.SysUser;
 import com.vulcan.service.SysUserService;
-import com.vulcan.utils.redis.RedisService;
 import jakarta.annotation.Resource;
 import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
