@@ -19,7 +19,7 @@ import java.util.List;
  * @Package: com.vulcan.web.System
  * @name: SysUserController
  * @Date: 2024/4/12  下午3:36
- * @Description //TODO
+ * @Description 系统用户控制器，提供用户管理相关接口，包括用户列表查询等功能
  */
 @RestController
 @RequestMapping("/sys/user")

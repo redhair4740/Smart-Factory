@@ -14,7 +14,7 @@ import java.util.Objects;
  * @Package: com.vulcan.web.System
  * @name: CaffeineController
  * @Date: 2024/4/16 下午7:58
- * @Description //TODO
+ * @Description Caffeine缓存控制器，提供缓存数据的添加和获取接口
  */
 @RestController
 @RequestMapping("/cache")

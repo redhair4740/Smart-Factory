@@ -12,11 +12,11 @@ import java.util.Optional;
  * @Project: Smart-Factory
  * @Package: com.vulcan.dao
  * @name: SysUserDao
- * @Date: 2024/4/12  下午3:29
- * @Description //TODO
+ * @Date: 2024/4/12 下午3:29
+ * @Description 系统用户数据访问接口，提供用户数据的CRUD操作和自定义查询方法
  */
 @Repository
-public interface SysUserRepository extends JpaRepository<SysUser,Long>, JpaSpecificationExecutor<SysUser> {
+public interface SysUserRepository extends JpaRepository<SysUser, Long>, JpaSpecificationExecutor<SysUser> {
 
     Optional<SysUser> findByLoginName(String loginName);
 

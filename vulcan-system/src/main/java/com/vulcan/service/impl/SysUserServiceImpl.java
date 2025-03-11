@@ -23,8 +23,8 @@ import java.util.Optional;
  * @Project: Smart-Factory
  * @Package: com.vulcan.service.impl
  * @name: SysUserServiceImpl
- * @Date: 2024/4/12  下午3:30
- * @Description //TODO
+ * @Date: 2024/4/12 下午3:30
+ * @Description 系统用户服务实现类，提供用户查询、分页列表等功能的具体实现
  */
 @Service
 public class SysUserServiceImpl implements SysUserService {
@@ -34,6 +34,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     /**
      * 根据id查询用户
+     * 
      * @param id
      * @return Optional<SysUser>
      */
@@ -47,43 +48,46 @@ public class SysUserServiceImpl implements SysUserService {
 
         Specification<SysUser> spec = (sysUser, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-            if (sysUserDto.getId() != null){
+            if (sysUserDto.getId() != null) {
                 predicates.add(criteriaBuilder.equal(sysUser.get("id"), sysUserDto.getId()));
             }
-            if (StringUtils.isNotBlank(sysUserDto.getCode())){
+            if (StringUtils.isNotBlank(sysUserDto.getCode())) {
                 predicates.add(criteriaBuilder.like(sysUser.get("code"), sysUserDto.getCode()));
             }
-            if (StringUtils.isNotBlank(sysUserDto.getLoginName())){
+            if (StringUtils.isNotBlank(sysUserDto.getLoginName())) {
                 predicates.add(criteriaBuilder.like(sysUser.get("loginName"), sysUserDto.getLoginName()));
             }
-            if (StringUtils.isNotBlank(sysUserDto.getPhone())){
+            if (StringUtils.isNotBlank(sysUserDto.getPhone())) {
                 predicates.add(criteriaBuilder.equal(sysUser.get("phone"), sysUserDto.getPhone()));
             }
-            if (StringUtils.isNotBlank(sysUserDto.getEmail())){
+            if (StringUtils.isNotBlank(sysUserDto.getEmail())) {
                 predicates.add(criteriaBuilder.equal(sysUser.get("email"), sysUserDto.getEmail()));
             }
-            if (StringUtils.isNotBlank(sysUserDto.getPlantCode())){
+            if (StringUtils.isNotBlank(sysUserDto.getPlantCode())) {
                 predicates.add(criteriaBuilder.equal(sysUser.get("plantCode"), sysUserDto.getPlantCode()));
             }
-            if (sysUserDto.getSuperAdminFlag() != null){
+            if (sysUserDto.getSuperAdminFlag() != null) {
                 predicates.add(criteriaBuilder.equal(sysUser.get("superAdminFlag"), sysUserDto.getSuperAdminFlag()));
             }
-            if (sysUserDto.getPlantAdminFlag() != null){
+            if (sysUserDto.getPlantAdminFlag() != null) {
                 predicates.add(criteriaBuilder.equal(sysUser.get("plantAdminFlag"), sysUserDto.getPlantAdminFlag()));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
 
-        Pageable pageable = PageRequest.of(sysUserDto.getPageNumber(), sysUserDto.getPageSize(), Sort.by("id").descending());
+        Pageable pageable = PageRequest.of(sysUserDto.getPageNumber(), sysUserDto.getPageSize(),
+                Sort.by("id").descending());
         Page<SysUser> sysUsers = sysUserRepository.findAll(spec, pageable);
 
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(sysUsers, new TypeToken<Page<SysUserVo>>() {}.getType());
+        return modelMapper.map(sysUsers, new TypeToken<Page<SysUserVo>>() {
+        }.getType());
     }
 
     /**
      * 根据登录名查询用户
+     * 
      * @param loginName
      * @return Optional<SysUser>
      */

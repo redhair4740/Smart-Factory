@@ -10,8 +10,8 @@ import java.io.Serializable;
  * @Project: Smart-Factory
  * @Package: com.vulcan.entity.dto
  * @name: SysUserDto
- * @Date: 2024/4/12  下午1:53
- * @Description //TODO
+ * @Date: 2024/4/12 下午1:53
+ * @Description 系统用户数据传输对象，用于封装用户信息的传输
  */
 @Data
 public class SysUserDto extends BaseEntity implements Serializable {
@@ -20,34 +20,34 @@ public class SysUserDto extends BaseEntity implements Serializable {
 
     private Long id;
 
-    //用户编码
+    // 用户编码
     private String code;
 
-    //用户名称
+    // 用户名称
     private String name;
 
-    //登录名称
+    // 登录名称
     private String loginName;
 
-    //手机号码
+    // 手机号码
     private String phone;
 
-    //邮箱
+    // 邮箱
     private String email;
 
-    //工厂编码
+    // 工厂编码
     private String plantCode;
 
-    //是否是超级管理员（0代表不是 1代表是）
+    // 是否是超级管理员（0代表不是 1代表是）
     private Integer superAdminFlag;
 
-    //是否是工厂管理员（0代表不是 1代表是）
+    // 是否是工厂管理员（0代表不是 1代表是）
     private Integer plantAdminFlag;
 
-    //分页
+    // 分页
     private Integer pageSize;
 
-    //分页
+    // 分页
     private Integer pageNumber;
 
 }

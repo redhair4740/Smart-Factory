@@ -18,8 +18,8 @@ import java.util.Optional;
  * @Project: Smart-Factory
  * @Package: com.vulcan.web.System
  * @name: SysLoginController
- * @Date: 2024/4/12  下午3:37
- * @Description //TODO
+ * @Date: 2024/4/12 下午3:37
+ * @Description 系统登录控制器，处理用户登录相关的请求
  */
 @RestController
 @RequestMapping("/sys")
@@ -30,6 +30,7 @@ public class SysLoginController {
 
     /**
      * 登录
+     * 
      * @param loginUserDto
      * @return
      */
@@ -40,9 +41,9 @@ public class SysLoginController {
         ModelMapper modelMapper = new ModelMapper();
         SysUser sysUserParam = modelMapper.map(loginUserDto, SysUser.class);
         Optional<SysUser> sysUser = sysUserService.findByLoginName(sysUserParam.getLoginName());
-        if(sysUser.isPresent()){
+        if (sysUser.isPresent()) {
             // 使用checkpw方法检查被加密的字符串是否与原始字符串匹配：
-            if(BCrypt.checkpw(loginUserDto.getPassword(), sysUser.get().getPassword())){
+            if (BCrypt.checkpw(loginUserDto.getPassword(), sysUser.get().getPassword())) {
                 // 第二步：根据账号id，进行登录
                 StpUtil.login(sysUser.get().getId());
                 return SaResult.ok("登录成功");
@@ -57,7 +58,7 @@ public class SysLoginController {
     @GetMapping("/refresh")
     public void refresh() {
         // 先检查是否已被冻结
-//        StpUtil.checkActiveTimeout();
+        // StpUtil.checkActiveTimeout();
         System.out.println(StpUtil.getTokenActiveTimeout());
         // 检查通过后继续续签
         StpUtil.updateLastActiveToNow();

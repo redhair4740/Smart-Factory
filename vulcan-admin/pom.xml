@@ -32,18 +32,7 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.vulcan</groupId>
-            <artifactId>vulcan-framework</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.vulcan</groupId>
-            <artifactId>vulcan-common</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
+        <!-- 只需要依赖vulcan-system模块，因为它已经依赖了framework和common模块 -->
         <dependency>
             <groupId>com.vulcan</groupId>
             <artifactId>vulcan-system</artifactId>

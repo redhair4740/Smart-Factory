@@ -16,8 +16,8 @@ import java.util.Base64;
  * @Project: Smart-Factory
  * @Package: com.vulcan.utils
  * @name: DecryptUtil
- * @Date: 2024/4/28  上午9:21
- * @Description //TODO
+ * @Date: 2024/4/28 上午9:21
+ * @Description 加密工具类，提供RSA加密解密功能
  */
 public class EncryptionUtils {
 
@@ -44,7 +44,8 @@ public class EncryptionUtils {
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding", "BC"); // 或 "RSA/ECB/OAEPPadding" 如果前端使用了OAEP
         if ("RSA/ECB/OAEPPadding".equals(cipher.getAlgorithm())) {
             // 对于OAEP padding，需要设置参数
-            OAEPParameterSpec oaepParams = new OAEPParameterSpec("SHA-256", "MGF1", MGF1ParameterSpec.SHA256, PSource.PSpecified.DEFAULT);
+            OAEPParameterSpec oaepParams = new OAEPParameterSpec("SHA-256", "MGF1", MGF1ParameterSpec.SHA256,
+                    PSource.PSpecified.DEFAULT);
             cipher.init(Cipher.DECRYPT_MODE, privateKey, oaepParams);
         } else {
             cipher.init(Cipher.DECRYPT_MODE, privateKey);

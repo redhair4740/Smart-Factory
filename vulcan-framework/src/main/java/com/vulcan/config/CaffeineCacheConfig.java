@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * @Package: com.vulcan.config
  * @name: CaffeineCacheConfig
  * @Date: 2024/4/16 下午7:48
- * @Description //TODO
+ * @Description Caffeine缓存配置类，用于配置本地缓存，提供高性能的缓存服务
  */
 @Configuration
 public class CaffeineCacheConfig {
@@ -29,4 +29,3 @@ public class CaffeineCacheConfig {
                 .build();
     }
 }
-

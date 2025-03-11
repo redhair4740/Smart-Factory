@@ -9,8 +9,8 @@ import java.util.Set;
  * @Project: Smart-Factory
  * @Package: com.vulcan.utils.redis
  * @name: RedisService
- * @Date: 2024/4/12  下午1:56
- * @Description //TODO
+ * @Date: 2024/4/12 下午1:56
+ * @Description Redis服务接口，定义了Redis缓存操作的基本方法
  */
 public interface RedisService {
 

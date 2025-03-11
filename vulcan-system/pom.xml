@@ -21,19 +21,12 @@
     </properties>
 
     <dependencies>
-
+        <!-- 只需要依赖framework模块，因为framework已经依赖了common模块 -->
         <dependency>
             <groupId>com.vulcan</groupId>
             <artifactId>vulcan-framework</artifactId>
             <version>1.0.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.vulcan</groupId>
-            <artifactId>vulcan-common</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
     </dependencies>
 
 </project>

@@ -25,7 +25,7 @@ import java.util.Optional;
  * @Package: com.vulcan.web.System
  * @name: AuthController
  * @Date: 2024/4/26  上午10:47
- * @Description //TODO
+ * @Description 认证控制器，负责处理用户登录认证等功能，使用Sa-Token框架实现身份验证
  */
 @RestController
 @RequestMapping("/auth")

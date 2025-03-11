@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
  * @Package: com.vulcan.config
  * @name: RedisConfig
  * @Date: 2024/4/12  上午10:46
- * @Description //TODO
+ * @Description Redis配置类，用于从配置文件中读取Redis连接参数，支持Redis缓存服务
  */
 @Data
 @Configuration
