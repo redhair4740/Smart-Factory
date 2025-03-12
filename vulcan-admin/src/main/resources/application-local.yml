@@ -5,10 +5,10 @@ spring:
         name: boot-admin
     data:
         redis:
-            host: localhsot     # Redis服务器地址
-            port: 6379          # Redis服务器连接端口
-            password: 123456    # Redis服务器连接密码（默认为空）
-            database: 0         # Redis数据库索引（默认为0）
+            host: redis.iyun233.top     # Redis服务器地址
+            port: 16379          # Redis服务器连接端口
+            password: HYJ628928628!    # Redis服务器连接密码（默认为空）
+            database: 1         # Redis数据库索引（默认为0）
             timeout: 60s        # 连接空闲超过N(s秒、ms毫秒，不加单位时使用毫秒)后关闭，0为禁用，这里配置值和tcp-keepalive值一致
             # Lettuce连接池配置
             lettuce:
@@ -43,17 +43,17 @@ spring:
             datasource:
                 master:
                     driver-class-name: org.postgresql.Driver
-                    url: jdbc:postgresql://localhsot:5432/vulcan?useUnicode=true&characterEncoding=utf8
+                    url: jdbc:postgresql://pg.iyun233.top:15432/vulcan?useUnicode=true&characterEncoding=utf8
                     username: postgres  
-                    password: postgres
+                    password: HYJ628928628!
     jpa:
         show-sql: true #显示sql
 
     rabbitmq:
-        host: localhost
-        port: 5672
-        username: guest
-        password: guest
+        host: mq.iyun233.top
+        port: 55672
+        username: yo
+        password: yo6yh8uj7uh6
 
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token:

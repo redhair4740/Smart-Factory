@@ -23,7 +23,7 @@ import java.util.Optional;
  * @Project: Smart-Factory
  * @Package: com.vulcan.auth.controller
  * @name: AuthController
- * @Date: 2024/4/26  上午10:47
+ * @Date: 2024/4/26 上午10:47
  * @Description 认证控制器，负责处理用户登录认证等功能，使用Sa-Token框架实现身份验证
  */
 @RestController
@@ -36,34 +36,79 @@ public class AuthController {
 
     /**
      * 登录
+     * 
      * @param loginUserDto
      * @return
      */
     @PostMapping("/login")
     public SaResult doLogin(@RequestBody LoginUserDto loginUserDto) {
-
-        try {
-            // 使用更新后的加密工具类进行解密
-            EncryptionUtils.decrypt(loginUserDto, "password", "password");
-        } catch (Exception e) {
-            log.error("登录密码解密失败", e);
+        // 解密密码
+        if (!decryptPassword(loginUserDto)) {
             return SaResult.error("登录失败");
         }
 
-        // 创建一个 ModelMapper 对象
+        // 验证用户身份并执行登录
+        return authenticateAndLogin(loginUserDto);
+    }
+
+    /**
+     * 解密用户密码
+     * 
+     * @param loginUserDto 登录用户DTO
+     * @return 解密是否成功
+     */
+    private boolean decryptPassword(LoginUserDto loginUserDto) {
+        try {
+            EncryptionUtils.decrypt(loginUserDto, "password", "password");
+            return true;
+        } catch (Exception e) {
+            log.error("登录密码解密失败", e);
+            return false;
+        }
+    }
+
+    /**
+     * 验证用户身份并执行登录
+     * 
+     * @param loginUserDto 登录用户DTO
+     * @return 登录结果
+     */
+    private SaResult authenticateAndLogin(LoginUserDto loginUserDto) {
+        // 转换DTO为实体对象
         ModelMapper modelMapper = new ModelMapper();
         SysUser sysUserParam = modelMapper.map(loginUserDto, SysUser.class);
+
+        // 查找用户并验证
         Optional<SysUser> sysUser = sysUserService.findByLoginName(sysUserParam.getLoginName());
-        if(sysUser.isPresent()){
-            // 使用checkpw方法检查被加密的字符串是否与原始字符串匹配：
-            if(BCrypt.checkpw(loginUserDto.getPassword(), sysUser.get().getPassword())){
-                // 第二步：根据账号id，进行登录
-                StpUtil.login(sysUser.get().getId());
-                SaTokenInfo saTokenInfo = StpUtil.getTokenInfo();
-                return SaResult.data(saTokenInfo);
-            }
+
+        if (sysUser.isPresent() && isPasswordValid(loginUserDto.getPassword(), sysUser.get().getPassword())) {
+            return performLogin(sysUser.get());
         }
+
         return SaResult.error("登录失败");
+    }
+
+    /**
+     * 验证密码是否正确
+     * 
+     * @param inputPassword  输入的密码
+     * @param storedPassword 存储的密码
+     * @return 密码是否匹配
+     */
+    private boolean isPasswordValid(String inputPassword, String storedPassword) {
+        return BCrypt.checkpw(inputPassword, storedPassword);
+    }
+
+    /**
+     * 执行登录操作
+     * 
+     * @param sysUser 系统用户
+     * @return 登录结果
+     */
+    private SaResult performLogin(SysUser sysUser) {
+        StpUtil.login(sysUser.getId());
+        SaTokenInfo saTokenInfo = StpUtil.getTokenInfo();
+        return SaResult.data(saTokenInfo);
     }
 
 }

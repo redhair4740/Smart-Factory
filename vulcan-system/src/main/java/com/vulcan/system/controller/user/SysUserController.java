@@ -3,7 +3,7 @@ package com.vulcan.system.controller.user;
 import com.vulcan.entity.ResultVo;
 import com.vulcan.entity.dto.SysUserDto;
 import com.vulcan.entity.vo.SysUserVo;
-import com.vulcan.service.SysUserService;
+import com.vulcan.system.service.SysUserService;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;

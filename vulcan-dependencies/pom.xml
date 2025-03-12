@@ -18,7 +18,7 @@
         <spring-boot.version>3.2.4</spring-boot.version>
         <druid.version>1.2.22</druid.version>
         <dynamic-datasource.version>4.3.0</dynamic-datasource.version>
-        <mysql-connector.version>8.0.33</mysql-connector.version>
+        <postgresql.version>42.6.1</postgresql.version>
         <sa-token.version>1.37.0</sa-token.version>
         <modelmapper.version>3.2.0</modelmapper.version>
         <jbcrypt.version>0.4</jbcrypt.version>
@@ -69,6 +69,16 @@
                 <artifactId>vulcan-mq</artifactId>
                 <version>${vulcan.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vulcan</groupId>
+                <artifactId>vulcan-entity</artifactId>
+                <version>${vulcan.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vulcan</groupId>
+                <artifactId>vulcan-cache</artifactId>
+                <version>${vulcan.version}</version>
+            </dependency>
             
             <!-- 数据库相关依赖 -->
             <dependency>
@@ -82,9 +92,9 @@
                 <version>${dynamic-datasource.version}</version>
             </dependency>
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector.version}</version>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
             </dependency>
             
             <!-- 认证授权相关依赖 -->

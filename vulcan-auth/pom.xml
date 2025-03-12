@@ -17,12 +17,6 @@
     </description>
 
     <dependencies>
-        <!-- 依赖system模块，它已经包含了framework和common模块 -->
-        <dependency>
-            <groupId>com.vulcan</groupId>
-            <artifactId>vulcan-system</artifactId>
-        </dependency>
-
         <!-- Sa-Token 权限认证 -->
         <dependency>
             <groupId>cn.dev33</groupId>
@@ -39,6 +33,11 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vulcan</groupId>
+            <artifactId>vulcan-framework</artifactId>
         </dependency>
     </dependencies>
 

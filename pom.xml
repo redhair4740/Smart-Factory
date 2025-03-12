@@ -63,8 +63,8 @@
         </dependency>
 
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
 
         <dependency>
@@ -134,6 +134,7 @@
         <module>vulcan-auth</module>
         <module>vulcan-mq</module>
         <module>vulcan-cache</module>
+        <module>vulcan-entity</module>
     </modules>
     <packaging>pom</packaging>
 

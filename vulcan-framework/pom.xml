@@ -13,8 +13,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>21</source>
+                    <target>21</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -32,6 +32,11 @@
         <dependency>
             <groupId>com.vulcan</groupId>
             <artifactId>vulcan-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vulcan</groupId>
+            <artifactId>vulcan-entity</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
