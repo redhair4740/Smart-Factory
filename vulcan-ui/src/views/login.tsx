@@ -14,6 +14,7 @@ import {
 import { defineComponent, reactive, ref } from "vue";
 import { User } from "@/model/auth.ts";
 import { useAuthStore } from "@/store/authStore";
+import { encrypt } from "@/utils/encryption";
 
 export default defineComponent({
   setup() {
@@ -30,7 +31,12 @@ export default defineComponent({
 
       loading.value = true;
       try {
-        const success = await authStore.login(data);
+        // 在发送请求前加密密码
+        const loginData = {
+          ...data,
+          password: encrypt(data.password)
+        };
+        const success = await authStore.login(loginData);
         if (success) {
           ElMessage.success("登录成功");
           router.push("/index");

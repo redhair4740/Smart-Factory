@@ -49,10 +49,10 @@
             <artifactId>vulcan-cache</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.vulcan</groupId>
-            <artifactId>vulcan-mq</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.vulcan</groupId>-->
+<!--            <artifactId>vulcan-mq</artifactId>-->
+<!--        </dependency>-->
 
     </dependencies>
 
