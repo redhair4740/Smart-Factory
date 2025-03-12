@@ -53,7 +53,7 @@ const route = useRoute()
 const authStore = useAuthStore()
 
 const isCollapse = ref(false)
-const username = computed(() => authStore.username)
+const username = computed(() => authStore.user?.loginName || '未知用户')
 
 const activeMenu = computed(() => route.path)
 

@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('auth', {
     async login(data: User): Promise<boolean> {
       try {
         const response = await apiLogin(data);
-        if (response && response.code === 200) {
+        if (response && response.data && response.data.code === 200) {
           const { token, user } = response.data;
           this.token = token;
           this.user = user;

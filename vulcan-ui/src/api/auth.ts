@@ -1,33 +1,28 @@
-import axios from 'axios';
+import request from '@/utils/request';
 import { User } from '@/model/auth.ts';
 
-// 开发环境API基础URL
-const BASE_URL = 'http://localhost:8080';
-
-// 模拟登录响应，实际项目中应该连接真实后端
+// 登录函数
 export async function login(data: User) {
   try {
-    // 实际项目中应该使用真实API
-    // const response = await axios.post(`${BASE_URL}/auth/login`, data);
-    
-    // 模拟登录成功响应
-    return {
-      code: 200,
-      message: '登录成功',
+    console.log('尝试登录，用户名:', data.loginName);
+
+    // 使用正确的路径
+    const loginPath = '/auth/login';
+    console.log('使用登录路径:', loginPath);
+
+    // 发送登录请求到后端API
+    const response = await request({
+      url: loginPath,
+      method: 'post',
       data: {
-        token: 'mock-token-' + Date.now(),
-        user: {
-          id: 1,
-          loginName: data.loginName,
-          name: '测试用户',
-          email: 'test@example.com',
-          plantCode: 'PLANT001',
-          superAdminFlag: 1
-        }
+        loginName: data.loginName,
+        password: data.password,
+        loginType: data.loginType
       }
-    };
-  } catch (error) {
+    });
+
+    return response;
+  } catch (error: unknown) {
     console.error('登录失败:', error);
-    throw error;
   }
 }

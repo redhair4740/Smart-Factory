@@ -17,7 +17,7 @@ import { useAuthStore } from "@/store/authStore";
 
 export default defineComponent({
   setup() {
-    const data = reactive<User>({ id: 0, loginName: "", password: "" });
+    const data = reactive<User>({ id: 0, loginName: "", password: "", loginType: "PC" });
     const router = useRouter();
     const authStore = useAuthStore();
     const loading = ref(false);
@@ -39,7 +39,7 @@ export default defineComponent({
         }
       } catch (error) {
         console.error("登录失败:", error);
-        ElMessage.error(`登录失败: ${error.message || '未知错误'}`);
+        ElMessage.error(`登录失败: ${(error as Error).message || '未知错误'}`);
       } finally {
         loading.value = false;
       }
@@ -69,15 +69,15 @@ export default defineComponent({
                       v-model={data.password}
                       placeholder="请输入密码"
                       show-password
-                      onKeyup={(e) => {
+                      onKeyup={(e: KeyboardEvent) => {
                         if (e.key === 'Enter') loginCommit();
                       }}
                     ></ElInput>
                   </ElFormItem>
                   <ElRow justify="space-between" class="login-buttons">
                     <ElButton onClick={register}>注册账号</ElButton>
-                    <ElButton 
-                      type="primary" 
+                    <ElButton
+                      type="primary"
                       onClick={loginCommit}
                       loading={loading.value}
                     >

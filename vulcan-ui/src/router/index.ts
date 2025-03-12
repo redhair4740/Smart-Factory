@@ -26,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
       title: "首页"
     }
-  },
+  }
 ];
 
 // 创建路由实例

@@ -20,8 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    // ...
-    "types": ["element-plus/global"],
     "paths": {
       "@/*": ["./src/*"]
     },

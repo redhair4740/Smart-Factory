@@ -38,6 +38,22 @@
             <groupId>com.vulcan</groupId>
             <artifactId>vulcan-system</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.vulcan</groupId>
+            <artifactId>vulcan-auth</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vulcan</groupId>
+            <artifactId>vulcan-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vulcan</groupId>
+            <artifactId>vulcan-mq</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -9,4 +9,5 @@ export interface User {
   plantCode?: string;
   superAdminFlag?: number;
   plantAdminFlag?: number;
+  loginType?: string;
 }
