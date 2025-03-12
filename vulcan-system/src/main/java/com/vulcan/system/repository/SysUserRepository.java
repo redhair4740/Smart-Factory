@@ -1,6 +1,6 @@
 package com.vulcan.system.repository;
 
-import com.vulcan.entity.po.SysUser;
+import com.vulcan.domain.entity.po.SysUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

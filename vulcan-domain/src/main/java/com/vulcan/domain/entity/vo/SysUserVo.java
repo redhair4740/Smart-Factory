@@ -1,6 +1,6 @@
-package com.vulcan.entity.dto;
+package com.vulcan.domain.entity.vo;
 
-import com.vulcan.entity.BaseEntity;
+import com.vulcan.domain.entity.BaseEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -8,13 +8,13 @@ import java.io.Serializable;
 /**
  * @author Y
  * @Project: Smart-Factory
- * @Package: com.vulcan.entity.dto
- * @name: SysUserDto
+ * @Package: com.vulcan.entity.vo
+ * @name: SysUserVo
  * @Date: 2024/4/12 下午1:53
- * @Description 系统用户数据传输对象，用于封装用户信息的传输
+ * @Description 系统用户视图对象，用于前端展示用户信息，不包含敏感字段如密码
  */
 @Data
-public class SysUserDto extends BaseEntity implements Serializable {
+public class SysUserVo extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,11 +43,5 @@ public class SysUserDto extends BaseEntity implements Serializable {
 
     // 是否是工厂管理员（0代表不是 1代表是）
     private Integer plantAdminFlag;
-
-    // 分页
-    private Integer pageSize;
-
-    // 分页
-    private Integer pageNumber;
 
 }

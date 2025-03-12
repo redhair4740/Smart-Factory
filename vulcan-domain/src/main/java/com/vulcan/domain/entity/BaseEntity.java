@@ -1,4 +1,4 @@
-package com.vulcan.entity;
+package com.vulcan.domain.entity;
 
 import jakarta.persistence.Column;
 import lombok.Data;

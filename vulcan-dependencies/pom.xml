@@ -71,7 +71,7 @@
             </dependency>
             <dependency>
                 <groupId>com.vulcan</groupId>
-                <artifactId>vulcan-entity</artifactId>
+                <artifactId>vulcan-domain</artifactId>
                 <version>${vulcan.version}</version>
             </dependency>
             <dependency>

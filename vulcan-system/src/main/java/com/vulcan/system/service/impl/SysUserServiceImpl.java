@@ -1,9 +1,9 @@
 package com.vulcan.system.service.impl;
 
-import com.vulcan.entity.dto.SysUserDto;
-import com.vulcan.entity.vo.SysUserVo;
+import com.vulcan.domain.entity.dto.SysUserDto;
+import com.vulcan.domain.entity.vo.SysUserVo;
 import com.vulcan.system.repository.SysUserRepository;
-import com.vulcan.entity.po.SysUser;
+import com.vulcan.domain.entity.po.SysUser;
 import com.vulcan.system.service.SysUserService;
 import jakarta.annotation.Resource;
 import jakarta.persistence.criteria.Predicate;

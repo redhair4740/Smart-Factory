@@ -2,8 +2,8 @@ package com.vulcan.system.controller.login;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
-import com.vulcan.entity.dto.LoginUserDto;
-import com.vulcan.entity.po.SysUser;
+import com.vulcan.domain.entity.dto.LoginUserDto;
+import com.vulcan.domain.entity.po.SysUser;
 import com.vulcan.system.service.SysUserService;
 import com.vulcan.common.utils.security.EncryptionUtils;
 import jakarta.annotation.Resource;

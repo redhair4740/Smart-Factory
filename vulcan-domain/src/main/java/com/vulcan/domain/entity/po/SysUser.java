@@ -1,6 +1,6 @@
-package com.vulcan.entity.po;
+package com.vulcan.domain.entity.po;
 
-import com.vulcan.entity.BaseEntity;
+import com.vulcan.domain.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

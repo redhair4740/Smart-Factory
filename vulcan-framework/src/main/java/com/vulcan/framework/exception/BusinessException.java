@@ -1,5 +1,6 @@
 package com.vulcan.framework.exception;
 
+import com.vulcan.domain.entity.CodeMsg;
 import lombok.Getter;
 
 /**
@@ -103,7 +104,7 @@ public sealed class BusinessException extends RuntimeException permits BusinessE
      * @param codeMsg 错误码对象
      * @return 业务异常
      */
-    public static BusinessException of(com.vulcan.entity.CodeMsg codeMsg) {
+    public static BusinessException of(CodeMsg codeMsg) {
         return new BusinessException(codeMsg.getCode(), codeMsg.getMsg());
     }
     

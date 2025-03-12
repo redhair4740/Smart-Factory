@@ -1,7 +1,7 @@
 package com.vulcan.framework.exception;
 
-import com.vulcan.entity.CodeMsg;
-import com.vulcan.entity.ResultVo;
+import com.vulcan.domain.entity.CodeMsg;
+import com.vulcan.domain.entity.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;

@@ -3,10 +3,10 @@ package com.vulcan.auth.controller;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
-import com.vulcan.entity.dto.LoginUserDto;
-import com.vulcan.entity.po.SysUser;
-import com.vulcan.service.SysUserService;
-import com.vulcan.utils.security.EncryptionUtils;
+import com.vulcan.domain.entity.dto.LoginUserDto;
+import com.vulcan.domain.entity.po.SysUser;
+import com.vulcan.domain.service.UserQueryService;
+import com.vulcan.common.utils.security.EncryptionUtils;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
@@ -32,7 +32,7 @@ import java.util.Optional;
 public class AuthController {
 
     @Resource
-    private SysUserService sysUserService;
+    private UserQueryService userQueryService;
 
     /**
      * 登录
@@ -79,7 +79,7 @@ public class AuthController {
         SysUser sysUserParam = modelMapper.map(loginUserDto, SysUser.class);
 
         // 查找用户并验证
-        Optional<SysUser> sysUser = sysUserService.findByLoginName(sysUserParam.getLoginName());
+        Optional<SysUser> sysUser = userQueryService.findByLoginName(sysUserParam.getLoginName());
 
         if (sysUser.isPresent() && isPasswordValid(loginUserDto.getPassword(), sysUser.get().getPassword())) {
             return performLogin(sysUser.get());

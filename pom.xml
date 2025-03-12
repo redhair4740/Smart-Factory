@@ -134,7 +134,7 @@
         <module>vulcan-auth</module>
         <module>vulcan-mq</module>
         <module>vulcan-cache</module>
-        <module>vulcan-entity</module>
+        <module>vulcan-domain</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,4 +1,4 @@
-package com.vulcan.entity.dto;
+package com.vulcan.domain.entity.dto;
 
 import lombok.Data;
 

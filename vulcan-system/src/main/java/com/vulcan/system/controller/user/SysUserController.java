@@ -1,8 +1,8 @@
 package com.vulcan.system.controller.user;
 
-import com.vulcan.entity.ResultVo;
-import com.vulcan.entity.dto.SysUserDto;
-import com.vulcan.entity.vo.SysUserVo;
+import com.vulcan.domain.entity.ResultVo;
+import com.vulcan.domain.entity.dto.SysUserDto;
+import com.vulcan.domain.entity.vo.SysUserVo;
 import com.vulcan.system.service.SysUserService;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;

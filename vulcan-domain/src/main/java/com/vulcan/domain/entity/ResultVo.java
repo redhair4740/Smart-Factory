@@ -1,4 +1,4 @@
-package com.vulcan.entity;
+package com.vulcan.domain.entity;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

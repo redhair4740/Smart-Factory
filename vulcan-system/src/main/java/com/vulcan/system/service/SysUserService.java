@@ -1,8 +1,8 @@
 package com.vulcan.system.service;
 
-import com.vulcan.entity.dto.SysUserDto;
-import com.vulcan.entity.po.SysUser;
-import com.vulcan.entity.vo.SysUserVo;
+import com.vulcan.domain.entity.dto.SysUserDto;
+import com.vulcan.domain.entity.po.SysUser;
+import com.vulcan.domain.entity.vo.SysUserVo;
 import org.springframework.data.domain.Page;
 import java.util.Optional;
 
