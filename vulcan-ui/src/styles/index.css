@@ -97,3 +97,30 @@ html, body {
 .p-3 { padding: 12px; }
 .p-4 { padding: 16px; }
 .p-5 { padding: 20px; }
+
+/* 登录页样式 */
+.login-container {
+  height: 100vh;
+  background-color: var(--background-color-base);
+}
+
+.login-row {
+  height: 100%;
+}
+
+.login-card {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--text-color-primary);
+  font-size: 24px;
+}
+
+.login-buttons {
+  margin-top: 20px;
+}

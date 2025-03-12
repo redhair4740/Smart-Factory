@@ -11,91 +11,78 @@ import {
   ElCol,
   ElMessage,
 } from "element-plus";
-import { defineComponent, reactive, watch } from "vue";
-import bcrypt from "bcryptjs";
-import { login } from "@/api/auth.ts";
+import { defineComponent, reactive, ref } from "vue";
 import { User } from "@/model/auth.ts";
+import { useAuthStore } from "@/store/authStore";
 
 export default defineComponent({
   setup() {
     const data = reactive<User>({ id: 0, loginName: "", password: "" });
     const router = useRouter();
-
-    watch(
-      () => data.loginName,
-      (newValue, oldValue) => {
-        console.info(newValue);
-        console.info(oldValue);
-      }
-    );
+    const authStore = useAuthStore();
+    const loading = ref(false);
 
     const loginCommit = async () => {
-      const hashedPassword = await bcrypt.hash(data.password, 10); // 使用bcrypt的盐值为10
-      data.password = hashedPassword;
+      if (!data.loginName || !data.password) {
+        ElMessage.warning("请输入用户名和密码");
+        return;
+      }
+
+      loading.value = true;
       try {
-        const responseData = await login({ ...data, password: hashedPassword });
-        if (responseData.code === 200 && responseData.msg) {
+        const success = await authStore.login(data);
+        if (success) {
+          ElMessage.success("登录成功");
           router.push("/index");
         } else {
-          ElMessage.error("登录失败:" + responseData.msg);
+          ElMessage.error("登录失败，请检查用户名和密码");
         }
-        // 在这里处理登录成功的情况，例如存储token
       } catch (error) {
         console.error("登录失败:", error);
-        ElMessage.error("登录失败:" + error.message);
+        ElMessage.error(`登录失败: ${error.message || '未知错误'}`);
+      } finally {
+        loading.value = false;
       }
     };
-    const register = () => {};
+
+    const register = () => {
+      ElMessage.info("注册功能暂未实现");
+    };
 
     return () => (
-      <ElContainer>
+      <ElContainer class="login-container">
         <ElMain>
-          <ElRow justify="center">
-            <ElCol span="12">
-              <ElCard
-                style={{
-                  maxWidth: "480px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <ElForm label-position="right" label-width="auto">
-                  <ElFormItem label="用户名" prop="username">
+          <ElRow justify="center" align="middle" class="login-row">
+            <ElCol xs={24} sm={16} md={12} lg={8} xl={6}>
+              <ElCard class="login-card" shadow="always">
+                <h2 class="login-title">系统登录</h2>
+                <ElForm label-position="top">
+                  <ElFormItem label="用户名" required>
                     <ElInput
                       v-model={data.loginName}
                       placeholder="请输入用户名"
+                      clearable
                     ></ElInput>
                   </ElFormItem>
-                  <ElFormItem label="密码" prop="password">
+                  <ElFormItem label="密码" required>
                     <ElInput
                       v-model={data.password}
                       placeholder="请输入密码"
                       show-password
+                      onKeyup={(e) => {
+                        if (e.key === 'Enter') loginCommit();
+                      }}
                     ></ElInput>
                   </ElFormItem>
-                  {/* 使用ElRow和ElCol来实现按钮靠右 */}
-                  <ElRow justify="end" gutter="10">
-                    <ElCol span="12">
-                      <ElButton
-                        type="primary"
-                        {...{
-                          onClick: register,
-                        }}
-                      >
-                        注册
-                      </ElButton>
-                    </ElCol>
-                    <ElCol span="12">
-                      <ElButton
-                        type="primary"
-                        {...{
-                          onClick: loginCommit,
-                        }}
-                      >
-                        登录
-                      </ElButton>
-                    </ElCol>
+                  <ElRow justify="space-between" class="login-buttons">
+                    <ElButton onClick={register}>注册账号</ElButton>
+                    <ElButton 
+                      type="primary" 
+                      onClick={loginCommit}
+                      loading={loading.value}
+                    >
+                      登录
+                    </ElButton>
                   </ElRow>
                 </ElForm>
               </ElCard>
@@ -106,3 +93,30 @@ export default defineComponent({
     );
   },
 });
+
+// 添加到styles/index.css或直接内联样式
+/**
+.login-container {
+  height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.login-row {
+  height: 100%;
+}
+
+.login-card {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #303133;
+}
+
+.login-buttons {
+  margin-top: 20px;
+}
+*/

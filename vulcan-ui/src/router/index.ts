@@ -7,13 +7,25 @@ import Login from "@/views/login.tsx";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "login",
+    redirect: "/login"
+  },
+  {
+    path: "/login",
+    name: "Login",
     component: Login,
+    meta: {
+      requiresAuth: false,
+      title: "登录"
+    }
   },
   {
     path: "/index",
     name: "Index",
     component: Index,
+    meta: {
+      requiresAuth: true,
+      title: "首页"
+    }
   },
 ];
 
