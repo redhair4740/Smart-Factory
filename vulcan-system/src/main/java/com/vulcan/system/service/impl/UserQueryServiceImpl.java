@@ -1,7 +1,7 @@
 package com.vulcan.system.service.impl;
 
 import com.vulcan.domain.entity.po.SysUser;
-import com.vulcan.domain.service.UserQueryService;
+import com.vulcan.domain.repository.UserQueryRepository;
 import com.vulcan.system.repository.SysUserRepository;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.Optional;
  * @Description 用户查询服务实现类，实现UserQueryService接口
  */
 @Service
-public class UserQueryServiceImpl implements UserQueryService {
+public class UserQueryServiceImpl implements UserQueryRepository {
 
     @Resource
     private SysUserRepository sysUserRepository;

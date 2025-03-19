@@ -1,5 +1,6 @@
 package com.vulcan.system.controller.login;
 
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.vulcan.domain.entity.dto.LoginUserDto;
@@ -34,6 +35,7 @@ public class SysLoginController {
      * @param loginUserDto
      * @return
      */
+    @SaIgnore
     @PostMapping("/login")
     public SaResult doLogin(@RequestBody LoginUserDto loginUserDto) {
         try {

@@ -5,7 +5,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.vulcan.domain.entity.dto.LoginUserDto;
 import com.vulcan.domain.entity.po.SysUser;
-import com.vulcan.domain.service.UserQueryService;
+import com.vulcan.domain.repository.UserQueryRepository;
 import com.vulcan.common.utils.security.EncryptionUtils;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ import java.util.Optional;
 public class AuthController {
 
     @Resource
-    private UserQueryService userQueryService;
+    private UserQueryRepository userQueryService;
 
     /**
      * 登录

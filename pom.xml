@@ -135,6 +135,7 @@
         <module>vulcan-mq</module>
         <module>vulcan-cache</module>
         <module>vulcan-domain</module>
+        <module>vulcan-code</module>
     </modules>
     <packaging>pom</packaging>
 

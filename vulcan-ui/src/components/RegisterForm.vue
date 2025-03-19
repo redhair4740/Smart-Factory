@@ -128,6 +128,8 @@ const debouncedCheckUsername = useDebounce(async (username: string) => {
 
   try {
     const res = await checkUsername(username)
+    console.log(res)
+    console.log(res.data)
     usernameStatus.value = res.data
   } catch (error) {
     usernameStatus.value = null
