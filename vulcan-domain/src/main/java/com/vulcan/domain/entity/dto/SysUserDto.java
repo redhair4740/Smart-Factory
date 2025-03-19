@@ -29,6 +29,9 @@ public class SysUserDto extends BaseEntity implements Serializable {
     // 登录名称
     private String loginName;
 
+    // 密码
+    private String password;
+
     // 手机号码
     private String phone;
 

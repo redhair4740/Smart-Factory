@@ -15,6 +15,7 @@ import { defineComponent, reactive, ref } from "vue";
 import { User } from "@/model/auth.ts";
 import { useAuthStore } from "@/store/authStore";
 import { encrypt } from "@/utils/encryption";
+import RegisterForm from "@/components/RegisterForm.vue";
 
 export default defineComponent({
   setup() {
@@ -22,6 +23,8 @@ export default defineComponent({
     const router = useRouter();
     const authStore = useAuthStore();
     const loading = ref(false);
+    const registerVisible = ref(false);
+    const registerFormRef = ref();
 
     const loginCommit = async () => {
       if (!data.loginName || !data.password) {
@@ -61,8 +64,17 @@ export default defineComponent({
       }
     };
 
-    const register = () => {
-      ElMessage.info("注册功能暂未实现");
+    // 打开注册对话框
+    const showRegister = () => {
+      registerVisible.value = true;
+    };
+
+    // 注册成功回调
+    const handleRegisterSuccess = (username: string) => {
+      registerVisible.value = false;
+      data.loginName = username;
+      data.password = "";
+      ElMessage.success("注册成功，请登录");
     };
 
     return () => (
@@ -91,7 +103,7 @@ export default defineComponent({
                     ></ElInput>
                   </ElFormItem>
                   <ElRow justify="space-between" class="login-buttons">
-                    <ElButton onClick={register}>注册账号</ElButton>
+                    <ElButton onClick={showRegister}>注册账号</ElButton>
                     <ElButton
                       type="primary"
                       onClick={loginCommit}
@@ -105,6 +117,13 @@ export default defineComponent({
             </ElCol>
           </ElRow>
         </ElMain>
+
+        {/* 注册表单对话框 */}
+        <RegisterForm
+          v-model={registerVisible.value}
+          ref={registerFormRef}
+          onRegister-success={handleRegisterSuccess}
+        />
       </ElContainer>
     );
   },

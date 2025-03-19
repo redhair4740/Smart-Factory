@@ -13,6 +13,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,9 @@ public class SysUserServiceImpl implements SysUserService {
     @Resource
     private SysUserRepository sysUserRepository;
 
+    @Resource
+    private ModelMapper modelMapper;
+
     /**
      * 根据id查询用户
      * 
@@ -45,44 +49,18 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public Page<SysUserVo> findAll(SysUserDto sysUserDto) {
-
-        Specification<SysUser> spec = (sysUser, query, criteriaBuilder) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            if (sysUserDto.getId() != null) {
-                predicates.add(criteriaBuilder.equal(sysUser.get("id"), sysUserDto.getId()));
-            }
-            if (StringUtils.isNotBlank(sysUserDto.getCode())) {
-                predicates.add(criteriaBuilder.like(sysUser.get("code"), sysUserDto.getCode()));
-            }
-            if (StringUtils.isNotBlank(sysUserDto.getLoginName())) {
-                predicates.add(criteriaBuilder.like(sysUser.get("loginName"), sysUserDto.getLoginName()));
-            }
-            if (StringUtils.isNotBlank(sysUserDto.getPhone())) {
-                predicates.add(criteriaBuilder.equal(sysUser.get("phone"), sysUserDto.getPhone()));
-            }
-            if (StringUtils.isNotBlank(sysUserDto.getEmail())) {
-                predicates.add(criteriaBuilder.equal(sysUser.get("email"), sysUserDto.getEmail()));
-            }
-            if (StringUtils.isNotBlank(sysUserDto.getPlantCode())) {
-                predicates.add(criteriaBuilder.equal(sysUser.get("plantCode"), sysUserDto.getPlantCode()));
-            }
-            if (sysUserDto.getSuperAdminFlag() != null) {
-                predicates.add(criteriaBuilder.equal(sysUser.get("superAdminFlag"), sysUserDto.getSuperAdminFlag()));
-            }
-            if (sysUserDto.getPlantAdminFlag() != null) {
-                predicates.add(criteriaBuilder.equal(sysUser.get("plantAdminFlag"), sysUserDto.getPlantAdminFlag()));
-            }
-
-            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-        };
-
-        Pageable pageable = PageRequest.of(sysUserDto.getPageNumber(), sysUserDto.getPageSize(),
-                Sort.by("id").descending());
-        Page<SysUser> sysUsers = sysUserRepository.findAll(spec, pageable);
-
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(sysUsers, new TypeToken<Page<SysUserVo>>() {
-        }.getType());
+        // 构建分页参数
+        Pageable pageable = PageRequest.of(
+                sysUserDto.getPageNumber() == null ? 0 : sysUserDto.getPageNumber(),
+                sysUserDto.getPageSize() == null ? 10 : sysUserDto.getPageSize(),
+                Sort.by(Sort.Direction.DESC, "createTime")
+        );
+        
+        // 查询分页数据
+        Page<SysUser> userPage = sysUserRepository.findAll(pageable);
+        
+        // 转换为VO
+        return userPage.map(user -> modelMapper.map(user, SysUserVo.class));
     }
 
     /**
@@ -94,5 +72,32 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public Optional<SysUser> findByLoginName(String loginName) {
         return sysUserRepository.findByLoginName(loginName);
+    }
+
+    @Override
+    @Transactional
+    public SysUserVo createUser(SysUserDto sysUserDto) {
+        // 转换DTO为实体
+        SysUser sysUser = modelMapper.map(sysUserDto, SysUser.class);
+        
+        // 设置默认值
+        if (sysUser.getSuperAdminFlag() == null) {
+            sysUser.setSuperAdminFlag(0); // 默认非超级管理员
+        }
+        
+        if (sysUser.getPlantAdminFlag() == null) {
+            sysUser.setPlantAdminFlag(0); // 默认非工厂管理员
+        }
+        
+        // 保存用户信息
+        SysUser savedUser = sysUserRepository.save(sysUser);
+        
+        // 转换为VO并返回
+        return modelMapper.map(savedUser, SysUserVo.class);
+    }
+    
+    @Override
+    public boolean existsByLoginName(String loginName) {
+        return sysUserRepository.existsByLoginName(loginName);
     }
 }

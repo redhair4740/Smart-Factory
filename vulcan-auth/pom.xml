@@ -17,18 +17,6 @@
     </description>
 
     <dependencies>
-        <!-- Sa-Token 权限认证 -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot3-starter</artifactId>
-        </dependency>
-
-        <!-- Sa-Token 整合 Redis -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-redis-jackson</artifactId>
-        </dependency>
-
         <!-- Spring Security Crypto -->
         <dependency>
             <groupId>org.springframework.security</groupId>

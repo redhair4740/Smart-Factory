@@ -32,6 +32,11 @@ public class ResultVo<T> {
         this.message = codeMsg.getMsg();
         this.code = codeMsg.getCode();
     }
+    
+    private ResultVo(Integer code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 
     /**
      * 成功返回结果
@@ -63,8 +68,29 @@ public class ResultVo<T> {
     public static <T> ResultVo<T> error(CodeMsg codeMsg) {
         if (codeMsg == null) {
             log.warn("codeMsg is null");
-            return null;
+            return new ResultVo<>(CodeMsg.SERVER_ERROR);
         }
         return new ResultVo<>(codeMsg);
+    }
+    
+    /**
+     * 失败返回结果
+     *
+     * @param message 错误消息
+     * @return 结果
+     */
+    public static <T> ResultVo<T> error(String message) {
+        return new ResultVo<>(500, message);
+    }
+    
+    /**
+     * 失败返回结果
+     *
+     * @param code 错误码
+     * @param message 错误消息
+     * @return 结果
+     */
+    public static <T> ResultVo<T> error(Integer code, String message) {
+        return new ResultVo<>(code, message);
     }
 }
