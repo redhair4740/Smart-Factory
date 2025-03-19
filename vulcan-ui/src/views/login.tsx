@@ -32,11 +32,21 @@ export default defineComponent({
       loading.value = true;
       try {
         // 在发送请求前加密密码
+        const encryptedPassword = encrypt(data.password);
+        if (!encryptedPassword) {
+          ElMessage.error("密码加密失败，请重试");
+          loading.value = false;
+          return;
+        }
+        
         const loginData = {
           ...data,
-          password: encrypt(data.password)
+          password: encryptedPassword
         };
+        
+        console.log("正在登录，用户名:", loginData.loginName);
         const success = await authStore.login(loginData);
+        
         if (success) {
           ElMessage.success("登录成功");
           router.push("/index");

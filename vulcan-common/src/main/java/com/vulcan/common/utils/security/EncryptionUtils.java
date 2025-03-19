@@ -20,14 +20,7 @@ import java.util.Base64;
  */
 public class EncryptionUtils {
 
-    public static final String privateKeyBase64 = "MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAyeQqlVAgAGZj9jsg\n" +
-            "FjL1wxAADmzXK2PdPXZ/hRxzFrdG8NnzxwpYirmeJQ5AZhylr845K5FzbBb+aNNQ\n" +
-            "1QWE3QIDAQABAkBseqre29S2Ik4n6hENnIgtLZW6KoVbDSe9dMSEM4srco3DJJ+q\n" +
-            "VvUcHW8xiEsKDlMeds7U8XNacf3clW5wdwLJAiEA+gL6e7fK1/Bl0MxaBBlLSsAo\n" +
-            "l8gwGwx2A+O8Kp9EwhMCIQDOuh+Y/CNuJOphR9d9dt8Dk3dMMAJxT1HwTxDu8gf7\n" +
-            "TwIhAIbsJJGv1mBC9C+CmPGtVNy6Zy3Cc3OlfesLc/jsiwbRAiEApzMmh0e3KEi3\n" +
-            "QMMoaRORwISvAnH6J8ct0J1CZuBe0EUCICFLDKyl3Q4M08HDMjGBu+jX9F/GYAQ6\n" +
-            "kT1SHbBDrSsK";
+    public static final String privateKeyBase64 = "MIICXAIBAAKBgQCgax6uY6BIWCykCyVhlTpaC8jdkr7GzhpOkhzdZYi/sRr7kBy41x7o8xDp4e5NpWTWF49EQxuRKObpNOfLXugYvUKxgc9UY8vWILjOg3oyN+GNKMxZAnOPPbxS2eNFjZYQleM/y8MyVdKqxfnS4Dtfe2Tj0VR63rQ2IAZ5YCBO8wIDAQABAoGAAgmqT5vLXu/jzUeo92beYWNx70KccskOc34OqM9P3+N/jL+FZeGxrlLcHaR1kv3tXHzbIIpbsMncuQynfyFbAGQ7U0XxpNOUI/jwer3j81hULggrj8Q+YngNJICMq7l1aMs3Lt21ejm+SqIDWRDkfCohRhuALM/3cAAPmAFBHeUCQQDuup81667jSqmhGv4GynbB6xi6NjORl4sGl5Cxh+V+zV3zM7ky23j77wGn7+HB5IA9WQRkswuUaTZL74DVeuQ9AkEArAYl5OZUtnt4HuuO38xpbJN6746hu9hC0BgiWTKL1ngNnoqZis7WCQJzDlyjF2edF8fXMOMlIymlHT9jSxvC7wJAUrtqIY2j9jERyDtKfZ/8uAd5ck8GYBZcn9Q22M93wRH61SW/sNhOfUC/GiwP2NoPdzM6SouiH7S2lGpUA6erIQJABLrei96xcZsPgHoloY2zUGL1vGSFme6mV6ZyO1WidrEyXquc8S4iwHiqxThS26/jp+W8ywFT4hWhDp7Rkh0fTQJBAKA60Gqtfi6aKkl90a9eBIIawO7Tfso2UQ0PZBFVM29a2AG5rvAjB1Et3cf0a7xf76XyF7LM4O03+h+mIlksY4c=";
 
     static {
         // 添加Bouncy Castle安全提供者
