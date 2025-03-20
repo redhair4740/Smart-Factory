@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * 编码规则仓库实现
+ * 编码规则仓库实现 - 领域仓库
  *
  * @author Y
  */
@@ -29,9 +29,6 @@ public class CodeRuleRepositoryImpl implements CodeQueryRepository {
 
     private final CodeRuleJpaRepository codeRuleJpaRepository;
     
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Override
     @Transactional
     public CodeRule save(CodeRule codeRule) {
@@ -55,38 +52,33 @@ public class CodeRuleRepositoryImpl implements CodeQueryRepository {
 
     @Override
     public List<CodeRule> findByCondition(CodeRule codeRule) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<CodeRule> criteriaQuery = criteriaBuilder.createQuery(CodeRule.class);
-        Root<CodeRule> root = criteriaQuery.from(CodeRule.class);
-        
-        List<Predicate> predicates = new ArrayList<>();
-        
-        if (codeRule != null) {
-            // 规则编码
-            if (StringUtils.isNotBlank(codeRule.getRuleCode())) {
-                predicates.add(criteriaBuilder.like(root.get("ruleCode"), "%" + codeRule.getRuleCode() + "%"));
+        return codeRuleJpaRepository.findAll((root, query, builder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            
+            if (codeRule != null) {
+                // 规则编码
+                if (StringUtils.isNotBlank(codeRule.getRuleCode())) {
+                    predicates.add(builder.like(root.get("ruleCode"), "%" + codeRule.getRuleCode() + "%"));
+                }
+                
+                // 规则名称
+                if (StringUtils.isNotBlank(codeRule.getRuleName())) {
+                    predicates.add(builder.like(root.get("ruleName"), "%" + codeRule.getRuleName() + "%"));
+                }
+                
+                // 应用ID
+                if (StringUtils.isNotBlank(codeRule.getAppId())) {
+                    predicates.add(builder.equal(root.get("appId"), codeRule.getAppId()));
+                }
+                
+                // 状态
+                if (codeRule.getStatus() != null) {
+                    predicates.add(builder.equal(root.get("status"), codeRule.getStatus()));
+                }
             }
             
-            // 规则名称
-            if (StringUtils.isNotBlank(codeRule.getRuleName())) {
-                predicates.add(criteriaBuilder.like(root.get("ruleName"), "%" + codeRule.getRuleName() + "%"));
-            }
-            
-            // 应用ID
-            if (StringUtils.isNotBlank(codeRule.getAppId())) {
-                predicates.add(criteriaBuilder.equal(root.get("appId"), codeRule.getAppId()));
-            }
-            
-            // 状态
-            if (codeRule.getStatus() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("status"), codeRule.getStatus()));
-            }
-        }
-        
-        criteriaQuery.where(predicates.toArray(new Predicate[0]));
-        criteriaQuery.orderBy(criteriaBuilder.desc(root.get("id")));
-        
-        return entityManager.createQuery(criteriaQuery).getResultList();
+            return builder.and(predicates.toArray(new Predicate[0]));
+        });
     }
 
     @Override

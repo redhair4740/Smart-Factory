@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * 编码规则JPA存储库
+ * 编码规则JPA存储库 - 基础数据访问层
  *
  * @author Y
  */
