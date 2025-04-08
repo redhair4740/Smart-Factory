@@ -1,8 +1,10 @@
 package com.vulcan.system.service.impl;
 
 import com.vulcan.domain.entity.dto.SysUserDto;
+import com.vulcan.domain.entity.param.CodeRuleParam;
 import com.vulcan.domain.entity.vo.SysUserVo;
 import com.vulcan.domain.entity.po.SysUser;
+import com.vulcan.domain.repository.CodeQueryRepository;
 import com.vulcan.domain.repository.UserQueryRepository;
 import com.vulcan.system.service.SysUserService;
 import jakarta.annotation.Resource;
@@ -34,6 +36,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Resource
     private ModelMapper modelMapper;
+
+    @Resource
+    private CodeQueryRepository codeRepository;
 
     /**
      * 根据id查询用户
@@ -89,9 +94,9 @@ public class SysUserServiceImpl implements SysUserService {
                             "%" + sysUserDto.getLoginName() + "%"));
                 }
                 
-                if (StringUtils.isNotBlank(sysUserDto.getUsername())) {
-                    predicates.add(criteriaBuilder.like(root.get("username"), 
-                            "%" + sysUserDto.getUsername() + "%"));
+                if (StringUtils.isNotBlank(sysUserDto.getName())) {
+                    predicates.add(criteriaBuilder.like(root.get("name"),
+                            "%" + sysUserDto.getName() + "%"));
                 }
                 
                 if (sysUserDto.getStatus() != null) {
@@ -131,6 +136,11 @@ public class SysUserServiceImpl implements SysUserService {
         
         // 设置默认值
         setDefaultValues(sysUser);
+
+        // 设置编码
+        CodeRuleParam param = new CodeRuleParam();
+        param.setRuleCode("USER_CODE");
+        sysUser.setCode(codeRepository.generateCode(param));
         
         // 保存用户信息
         SysUser savedUser = userRepository.save(sysUser);
@@ -174,7 +184,7 @@ public class SysUserServiceImpl implements SysUserService {
         }
         
         if (sysUser.getStatus() == null) {
-            sysUser.setStatus(1); // 默认启用状态
+            sysUser.setStatus("1"); // 默认启用状态
         }
     }
     
@@ -276,7 +286,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     @Transactional
     public boolean enableUser(Long id) {
-        return updateUserStatus(id, 1);
+        return updateUserStatus(id, "1");
     }
     
     /**
@@ -288,7 +298,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     @Transactional
     public boolean disableUser(Long id) {
-        return updateUserStatus(id, 0);
+        return updateUserStatus(id, "0");
     }
     
     /**
@@ -298,7 +308,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @param status 状态(0-禁用，1-启用)
      * @return 是否更新成功
      */
-    private boolean updateUserStatus(Long id, Integer status) {
+    private boolean updateUserStatus(Long id, String status) {
         // 验证参数
         if (id == null) {
             throw new IllegalArgumentException("用户ID不能为空");

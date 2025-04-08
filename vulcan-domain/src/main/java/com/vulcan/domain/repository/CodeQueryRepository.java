@@ -1,5 +1,6 @@
 package com.vulcan.domain.repository;
 
+import com.vulcan.domain.entity.param.CodeRuleParam;
 import com.vulcan.domain.entity.po.CodeRule;
 
 import java.util.List;
@@ -11,6 +12,14 @@ import java.util.Optional;
  * @author Y
  */
 public interface CodeQueryRepository {
+
+    /**
+     * 生成编码
+     *
+     * @param param 参数
+     * @return 生成的编码
+     */
+    String generateCode(CodeRuleParam param);
 
     /**
      * 保存编码规则
@@ -75,5 +84,5 @@ public interface CodeQueryRepository {
      * @param status 状态（0-禁用；1-启用）
      * @return 更新结果
      */
-    boolean updateStatus(Long id, Integer status);
+    boolean updateStatus(Long id, String status);
 } 

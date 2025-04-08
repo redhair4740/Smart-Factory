@@ -1,4 +1,4 @@
-package com.vulcan.system.service.impl;
+package com.vulcan.system.repository.impl;
 
 import com.vulcan.domain.entity.po.SysUser;
 import com.vulcan.domain.repository.UserQueryRepository;
@@ -24,7 +24,7 @@ import java.util.Optional;
  */
 @Repository
 @RequiredArgsConstructor
-public class UserQueryServiceImpl implements UserQueryRepository {
+public class UserQueryRepositoryImpl implements UserQueryRepository {
 
     private final SysUserRepository sysUserRepository;
 

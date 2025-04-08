@@ -41,7 +41,7 @@ public class CodeRuleServiceImpl implements CodeRuleService {
         CodeRule codeRule = getAndCacheCodeRule(param.getRuleCode());
 
         // 检查编码规则是否启用
-        if (codeRule.getStatus() != 1) {
+        if (!"q".equals(codeRule.getStatus())) {
             throw new IllegalStateException("编码规则已禁用：" + param.getRuleCode());
         }
 
@@ -123,7 +123,7 @@ public class CodeRuleServiceImpl implements CodeRuleService {
             codeRule.setStep(1);
         }
         if (codeRule.getStatus() == null) {
-            codeRule.setStatus(1);
+            codeRule.setStatus("1");
         }
     }
 
@@ -230,16 +230,16 @@ public class CodeRuleServiceImpl implements CodeRuleService {
     @Override
     @Transactional
     public boolean enableCodeRule(Long id) {
-        return updateCodeRuleStatus(id, 1);
+        return updateCodeRuleStatus(id, "1");
     }
 
     @Override
     @Transactional
     public boolean disableCodeRule(Long id) {
-        return updateCodeRuleStatus(id, 0);
+        return updateCodeRuleStatus(id, "0");
     }
 
-    private boolean updateCodeRuleStatus(Long id, Integer status) {
+    private boolean updateCodeRuleStatus(Long id, String status) {
         if (id == null) {
             throw new IllegalArgumentException("编码规则ID不能为空");
         }
