@@ -17,7 +17,7 @@ export async function register(data: User) {
     if (!encryptedPassword) {
       throw new Error('密码加密失败');
     }
-    
+
     // 构建请求参数
     const timestamp = getTimestamp();
     const requestData = {
@@ -26,18 +26,17 @@ export async function register(data: User) {
       name: data.name || data.loginName,
       email: data.email,
       phone: data.phone,
-      timestamp: timestamp,
     };
-    
+
     // 生成签名
     const sign = generateSignature(requestData, timestamp);
-    
+
     // 添加签名到请求
     const requestWithSign = {
       ...requestData,
       sign
     };
-    
+
     console.log('发送注册请求:', {
       ...requestWithSign,
       password: '********' // 日志中隐藏密码
@@ -69,20 +68,20 @@ export async function register(data: User) {
 export async function checkUsername(loginName: string) {
   try {
     console.log('检查用户名是否可用:', loginName);
-    
+
     // 添加时间戳避免缓存
     const timestamp = new Date().getTime();
-    
+
     const response = await request({
       url: '/sys/user/check-username',
       method: 'get',
       params: { loginName, _t: timestamp }
     });
-    
+
     return response;
   } catch (error) {
     console.error('检查用户名失败:', error);
-    
+
     // 如果是权限错误，使用模拟响应，避免阻塞用户注册
     if (String(error).includes('token') || String(error).includes('登录')) {
       console.warn('权限验证失败，返回模拟响应');
@@ -92,7 +91,7 @@ export async function checkUsername(loginName: string) {
         message: '用户名检查服务暂不可用，请在注册后验证'
       };
     }
-    
+
     throw error;
   }
 } 

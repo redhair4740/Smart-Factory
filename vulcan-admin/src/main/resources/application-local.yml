@@ -73,6 +73,10 @@ sa-token:
     token-style: uuid
     # 是否输出操作日志
     is-log: true
+    # jwt秘钥
+    jwt-secret-key: jcqpnitiuivvgoypxyqtxbbgpylkixm
+    # token前缀
+    token_prefix: Bearer
 
 liteflow:
     #规则文件路径

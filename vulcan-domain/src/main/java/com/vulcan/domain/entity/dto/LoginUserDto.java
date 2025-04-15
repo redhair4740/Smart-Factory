@@ -22,4 +22,7 @@ public class LoginUserDto {
     // 登录类型
     String loginType;
 
+    // 签名
+    private String sign;
+
 }

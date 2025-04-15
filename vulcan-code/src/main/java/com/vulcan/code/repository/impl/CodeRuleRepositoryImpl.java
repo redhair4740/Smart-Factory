@@ -42,7 +42,7 @@ public class CodeRuleRepositoryImpl implements CodeQueryRepository {
         CodeRule codeRule = getAndCacheCodeRule(param.getRuleCode());
 
         // 检查编码规则是否启用
-        if (!"q".equals(codeRule.getStatus())) {
+        if (!"1".equals(codeRule.getStatus())) {
             throw new IllegalStateException("编码规则已禁用：" + param.getRuleCode());
         }
 

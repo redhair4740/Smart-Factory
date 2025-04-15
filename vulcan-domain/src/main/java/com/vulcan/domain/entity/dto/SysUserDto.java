@@ -1,6 +1,7 @@
 package com.vulcan.domain.entity.dto;
 
 import com.vulcan.domain.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
  * @Description 系统用户数据传输对象，用于封装用户信息的传输
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SysUserDto extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,4 +55,6 @@ public class SysUserDto extends BaseEntity implements Serializable {
     // 分页
     private Integer pageNumber;
 
+    // 签名
+    private String sign;
 }

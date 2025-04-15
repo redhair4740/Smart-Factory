@@ -1,7 +1,7 @@
 package com.vulcan.framework.config;
 
 import cn.dev33.satoken.interceptor.SaInterceptor;
-import cn.dev33.satoken.jwt.StpLogicJwtForStateless;
+//import cn.dev33.satoken.jwt.StpLogicJwtForStateless;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpLogic;
 import cn.dev33.satoken.stp.StpUtil;
@@ -43,11 +43,11 @@ public class SaTokenConfig implements WebMvcConfigurer {
     }
 
 
-    /**
-     * Sa-Token 整合 jwt (无状态模式)
-     */
-    @Bean
-    public StpLogic getStpLogicJwt() {
-        return new StpLogicJwtForStateless();
-    }
+//    /**
+//     * Sa-Token 整合 jwt (无状态模式)
+//     */
+//    @Bean
+//    public StpLogic getStpLogicJwt() {
+//        return new StpLogicJwtForStateless();
+//    }
 }

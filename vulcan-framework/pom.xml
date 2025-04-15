@@ -53,10 +53,10 @@
         </dependency>
 
         <!-- Sa-Token JWT集成 -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-jwt</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>cn.dev33</groupId>-->
+<!--            <artifactId>sa-token-jwt</artifactId>-->
+<!--        </dependency>-->
 
         <!-- Sa-Token 整合 Redis -->
         <dependency>
