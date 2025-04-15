@@ -24,8 +24,8 @@ router.beforeEach(async (to, from, next) => {
     // 需要认证但未登录，重定向到登录页
     next({ path: '/login', query: { redirect: to.fullPath } })
   } else if (to.path === '/login' && isAuthenticated) {
-    // 已登录访问登录页，重定向到首页
-    next({ path: '/index' })
+    // 已登录访问登录页，重定向到仪表盘
+    next({ path: '/dashboard' })
   } else {
     // 其他情况正常通过
     next()

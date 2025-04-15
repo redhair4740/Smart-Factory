@@ -41,18 +41,18 @@ export default defineComponent({
           loading.value = false;
           return;
         }
-        
+
         const loginData = {
           ...data,
           password: encryptedPassword
         };
-        
+
         console.log("正在登录，用户名:", loginData.loginName);
         const success = await authStore.login(loginData);
-        
+
         if (success) {
           ElMessage.success("登录成功");
-          router.push("/index");
+          router.push("/dashboard");
         } else {
           ElMessage.error("登录失败，请检查用户名和密码");
         }

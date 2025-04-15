@@ -1,7 +1,7 @@
 // src/router/index.ts
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Index from "@/views/index.vue";
 import Login from "@/views/login.tsx";
+import AppLayout from "@/components/layout/AppLayout.vue";
 
 // 定义路由配置数组
 const routes: Array<RouteRecordRaw> = [
@@ -19,15 +19,31 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/index",
-    name: "Index",
-    component: Index,
+    path: "/",
+    component: AppLayout,
+    redirect: "/dashboard",
+    children: [
+      {
+        path: "dashboard",
+        name: "Dashboard",
+        component: () => import("@/views/dashboard/index.vue"),
+        meta: {
+          title: "仪表盘",
+          requiresAuth: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: () => import("@/views/error/404.vue"),
     meta: {
-      requiresAuth: true,
-      title: "首页"
+      title: "404",
+      requiresAuth: false
     }
   }
-];
+]
 
 // 创建路由实例
 const router = createRouter({
