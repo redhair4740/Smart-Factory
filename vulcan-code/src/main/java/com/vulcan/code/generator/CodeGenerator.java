@@ -25,7 +25,7 @@ public interface CodeGenerator {
      * @param codeRule 编码规则
      * @return 下一个序列值
      */
-    Long getNextSequence(CodeRule codeRule);
+    Integer getNextSequence(CodeRule codeRule);
 
     /**
      * 生成序列号部分
@@ -34,5 +34,5 @@ public interface CodeGenerator {
      * @param length 长度
      * @return 序列号
      */
-    String formatSequence(Long sequence, Integer length);
+    String formatSequence(Integer sequence, Integer length);
 } 

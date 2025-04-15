@@ -61,7 +61,7 @@ public class CodeRule extends BaseEntity implements Serializable {
      * 当前序列值
      */
     @Column(name = "current_sequence", nullable = false)
-    private Long currentSequence;
+    private Integer currentSequence;
 
     /**
      * 是否循环（0-否；1-是）
@@ -79,7 +79,7 @@ public class CodeRule extends BaseEntity implements Serializable {
      * 最大值（循环时的最大值）
      */
     @Column(name = "max_value")
-    private Long maxValue;
+    private Integer maxValue;
 
     /**
      * 步长

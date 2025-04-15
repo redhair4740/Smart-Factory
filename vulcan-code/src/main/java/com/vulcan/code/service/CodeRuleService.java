@@ -84,7 +84,7 @@ public interface CodeRuleService {
      * @param sequence 序列值
      * @return 重置结果
      */
-    boolean resetSequence(Long id, Long sequence);
+    boolean resetSequence(Long id, Integer sequence);
 
     /**
      * 启用编码规则

@@ -64,7 +64,7 @@ public class DefaultCodeGenerator implements CodeGenerator {
         }
 
         // 获取序列号并格式化
-        Long sequence = getNextSequence(codeRule);
+        Integer sequence = getNextSequence(codeRule);
         String sequenceStr = formatSequence(sequence, codeRule.getSequenceLength());
         code.append(sequenceStr);
 
@@ -73,7 +73,7 @@ public class DefaultCodeGenerator implements CodeGenerator {
 
     @Override
     @Transactional
-    public Long getNextSequence(CodeRule codeRule) {
+    public Integer getNextSequence(CodeRule codeRule) {
         String lockKey = LOCK_KEY_PREFIX + codeRule.getRuleCode();
         RLock lock = redissonClient.getLock(lockKey);
 
@@ -88,17 +88,17 @@ public class DefaultCodeGenerator implements CodeGenerator {
             CodeRule latestCodeRule = codeRuleJpaRepository.findById(codeRule.getId())
                     .orElseThrow(() -> new RuntimeException("编码规则不存在：" + codeRule.getRuleCode()));
 
-            Long currentSequence = latestCodeRule.getCurrentSequence();
+            Integer currentSequence = latestCodeRule.getCurrentSequence();
             Integer step = latestCodeRule.getStep();
             
             // 计算下一个序列值
-            Long nextSequence = currentSequence + step;
+            Integer nextSequence = currentSequence + step;
             
             // 处理循环规则
             if (latestCodeRule.getIsCycle() == 1 && latestCodeRule.getMaxValue() != null) {
                 // 如果超出最大值，则重置为1
                 if (nextSequence > latestCodeRule.getMaxValue()) {
-                    nextSequence = 1L;
+                    nextSequence = 1;
                 }
             }
             
@@ -120,7 +120,7 @@ public class DefaultCodeGenerator implements CodeGenerator {
     }
 
     @Override
-    public String formatSequence(Long sequence, Integer length) {
+    public String formatSequence(Integer sequence, Integer length) {
         return String.format("%0" + length + "d", sequence);
     }
 } 

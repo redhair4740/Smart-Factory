@@ -115,7 +115,7 @@ public class CodeRuleRepositoryImpl implements CodeQueryRepository {
 
     @Override
     @Transactional
-    public boolean updateSequence(Long id, Long sequence) {
+    public boolean updateSequence(Long id, Integer sequence) {
         return codeRuleJpaRepository.updateSequence(id, sequence) > 0;
     }
 

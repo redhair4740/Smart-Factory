@@ -1,7 +1,12 @@
 package com.vulcan.domain.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @author Y
@@ -12,6 +17,7 @@ import lombok.Data;
  * @Description 基础实体类，提供所有实体共用的基本属性和字段
  */
 @Data
+@MappedSuperclass
 public class BaseEntity {
 
     // 创建者
@@ -20,7 +26,8 @@ public class BaseEntity {
 
     // 创建时间
     @Column(name = "create_time")
-    private String createTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createTime;
 
     // 更新者
     @Column(name = "update_by")
@@ -28,7 +35,8 @@ public class BaseEntity {
 
     // 更新时间
     @Column(name = "update_time")
-    private String updateTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updateTime;
 
     // 备注
     @Column(name = "remark")

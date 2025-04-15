@@ -35,7 +35,7 @@ public interface CodeRuleJpaRepository extends JpaRepository<CodeRule, Long>, Jp
      */
     @Modifying
     @Query("UPDATE CodeRule c SET c.currentSequence = :sequence, c.updateTime = CURRENT_TIMESTAMP WHERE c.id = :id")
-    int updateSequence(@Param("id") Long id, @Param("sequence") Long sequence);
+    int updateSequence(@Param("id") Long id, @Param("sequence") Integer sequence);
 
     /**
      * 更新状态

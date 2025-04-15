@@ -75,7 +75,7 @@ public interface CodeQueryRepository {
      * @param sequence 序列值
      * @return 更新结果
      */
-    boolean updateSequence(Long id, Long sequence);
+    boolean updateSequence(Long id, Integer sequence);
     
     /**
      * 更新状态

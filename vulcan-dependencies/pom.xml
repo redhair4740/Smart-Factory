@@ -80,6 +80,11 @@
                 <artifactId>vulcan-cache</artifactId>
                 <version>${vulcan.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.vulcan</groupId>
+                <artifactId>vulcan-code</artifactId>
+                <version>${vulcan.version}</version>
+            </dependency>
             
             <!-- 数据库相关依赖 -->
             <dependency>

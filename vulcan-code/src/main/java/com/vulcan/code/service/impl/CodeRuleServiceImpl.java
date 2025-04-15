@@ -7,6 +7,7 @@ import com.vulcan.domain.entity.param.CodeRuleParam;
 import com.vulcan.domain.entity.po.CodeRule;
 import com.vulcan.domain.repository.CodeQueryRepository;
 import com.vulcan.code.service.CodeRuleService;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -28,10 +29,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CodeRuleServiceImpl implements CodeRuleService {
 
-    private final CodeQueryRepository codeRepository;
-    private final CodeRuleCache codeRuleCache;
-    private final CodeGenerator codeGenerator;
-    private final ModelMapper modelMapper;
+    @Resource
+    private CodeQueryRepository codeRepository;
+    @Resource
+    private CodeRuleCache codeRuleCache;
+    @Resource
+    private CodeGenerator codeGenerator;
+    @Resource
+    private ModelMapper modelMapper;
 
     @Override
     public String generateCode(CodeRuleParam param) {
@@ -117,7 +122,7 @@ public class CodeRuleServiceImpl implements CodeRuleService {
 
     private void setDefaultValues(CodeRule codeRule) {
         if (codeRule.getCurrentSequence() == null) {
-            codeRule.setCurrentSequence(1L);
+            codeRule.setCurrentSequence(1);
         }
         if (codeRule.getStep() == null) {
             codeRule.setStep(1);
@@ -204,7 +209,7 @@ public class CodeRuleServiceImpl implements CodeRuleService {
 
     @Override
     @Transactional
-    public boolean resetSequence(Long id, Long sequence) {
+    public boolean resetSequence(Long id, Integer sequence) {
         if (id == null) {
             throw new IllegalArgumentException("编码规则ID不能为空");
         }

@@ -118,7 +118,7 @@ public class CodeRuleController {
      * @return 重置结果
      */
     @PutMapping("/{id}/sequence/{sequence}")
-    public ResultVo<Boolean> resetSequence(@PathVariable Long id, @PathVariable Long sequence) {
+    public ResultVo<Boolean> resetSequence(@PathVariable Long id, @PathVariable Integer sequence) {
         return ResultVo.success(codeRuleService.resetSequence(id, sequence));
     }
 
